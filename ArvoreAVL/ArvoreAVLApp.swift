@@ -11,7 +11,7 @@ import SwiftUI
 struct ArvoreAVLApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ViewPrincipal(viewModel: ViewPrincipalViewModel())
         }
     }
 }
