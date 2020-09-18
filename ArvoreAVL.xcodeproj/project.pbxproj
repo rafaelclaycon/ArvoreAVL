@@ -15,7 +15,7 @@
 		D9D5EACE25144BDF001C1C9E /* No.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D5EACD25144BDF001C1C9E /* No.swift */; };
 		D9D5EAD125144FF0001C1C9E /* EstiloBordaComContorno.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D5EAD025144FF0001C1C9E /* EstiloBordaComContorno.swift */; };
 		D9D5EAD525145591001C1C9E /* ViewPrincipalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D5EAD425145591001C1C9E /* ViewPrincipalViewModel.swift */; };
-		D9D5EAD825145C96001C1C9E /* Arvore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D5EAD725145C96001C1C9E /* Arvore.swift */; };
+		D9D5EAD825145C96001C1C9E /* DiagramaArvore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D5EAD725145C96001C1C9E /* DiagramaArvore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +29,7 @@
 		D9D5EACD25144BDF001C1C9E /* No.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = No.swift; sourceTree = "<group>"; };
 		D9D5EAD025144FF0001C1C9E /* EstiloBordaComContorno.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstiloBordaComContorno.swift; sourceTree = "<group>"; };
 		D9D5EAD425145591001C1C9E /* ViewPrincipalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPrincipalViewModel.swift; sourceTree = "<group>"; };
-		D9D5EAD725145C96001C1C9E /* Arvore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arvore.swift; sourceTree = "<group>"; };
+		D9D5EAD725145C96001C1C9E /* DiagramaArvore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagramaArvore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +65,7 @@
 				D9D5EAB625141E6C001C1C9E /* ArvoreAVLApp.swift */,
 				D9D5EAB825141E6C001C1C9E /* ViewPrincipal.swift */,
 				D9D5EAD425145591001C1C9E /* ViewPrincipalViewModel.swift */,
-				D9D5EAD725145C96001C1C9E /* Arvore.swift */,
+				D9D5EAD725145C96001C1C9E /* DiagramaArvore.swift */,
 				D9D5EACD25144BDF001C1C9E /* No.swift */,
 				D9D5EAD025144FF0001C1C9E /* EstiloBordaComContorno.swift */,
 				D9D5EACA2514474B001C1C9E /* NoView.swift */,
@@ -157,7 +157,7 @@
 				D9D5EAD125144FF0001C1C9E /* EstiloBordaComContorno.swift in Sources */,
 				D9D5EAB925141E6C001C1C9E /* ViewPrincipal.swift in Sources */,
 				D9D5EAB725141E6C001C1C9E /* ArvoreAVLApp.swift in Sources */,
-				D9D5EAD825145C96001C1C9E /* Arvore.swift in Sources */,
+				D9D5EAD825145C96001C1C9E /* DiagramaArvore.swift in Sources */,
 				D9D5EAD525145591001C1C9E /* ViewPrincipalViewModel.swift in Sources */,
 				D9D5EACB2514474B001C1C9E /* NoView.swift in Sources */,
 			);
