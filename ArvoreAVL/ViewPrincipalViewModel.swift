@@ -111,6 +111,11 @@ class ViewPrincipalViewModel: ObservableObject {
                     return
                 } else if no!.esquerda!.fatorBalanceamento < 0 {
                     print("Rotação Dupla à Direita")
+                    if no!.isRaiz {
+                        self.raiz = no!.esquerda!.direita
+                    }
+                    rotacaoDuplaADireita(no!)
+                    return
                 }
             }
             
@@ -176,5 +181,30 @@ class ViewPrincipalViewModel: ObservableObject {
         
         y?.pai = k2
         z?.pai = k2
+    }
+    
+    func rotacaoDuplaADireita(_ k3: No) {
+        let k1 = k3.esquerda!
+        let k2 = k1.direita!
+        //let a = k1.esquerda
+        let b = k2.esquerda
+        let c = k2.direita
+        //let d = k3.direita
+        
+        // Rotação esquerda
+        k3.esquerda = k2
+        
+        k2.pai = k3
+        k2.esquerda = k1
+        
+        k1.pai = k2
+        k1.direita = b
+        
+        // Rotação direita
+        k2.pai = k3.pai
+        k2.direita = k3
+        
+        k3.pai = k2
+        k3.esquerda = c
     }
 }
