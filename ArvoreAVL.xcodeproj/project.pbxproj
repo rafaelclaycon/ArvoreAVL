@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D9440FF52514F18500A1694C /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9440FF42514F18500A1694C /* ImageStore.swift */; };
+		D9440FF92514F1E900A1694C /* imagem_perfil.png in Resources */ = {isa = PBXBuildFile; fileRef = D9440FF82514F1E900A1694C /* imagem_perfil.png */; };
+		D994A617251650630045EC21 /* String+isInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = D994A616251650630045EC21 /* String+isInt.swift */; };
+		D994A61A251657D80045EC21 /* Color+CoresPersonalizadas.swift in Sources */ = {isa = PBXBuildFile; fileRef = D994A619251657D80045EC21 /* Color+CoresPersonalizadas.swift */; };
 		D9D5EAB725141E6C001C1C9E /* ArvoreAVLApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D5EAB625141E6C001C1C9E /* ArvoreAVLApp.swift */; };
 		D9D5EAB925141E6C001C1C9E /* ViewPrincipal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D5EAB825141E6C001C1C9E /* ViewPrincipal.swift */; };
 		D9D5EABB25141E6D001C1C9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9D5EABA25141E6D001C1C9E /* Assets.xcassets */; };
@@ -19,6 +23,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D9440FF42514F18500A1694C /* ImageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
+		D9440FF82514F1E900A1694C /* imagem_perfil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imagem_perfil.png; sourceTree = "<group>"; };
+		D994A616251650630045EC21 /* String+isInt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+isInt.swift"; sourceTree = "<group>"; };
+		D994A619251657D80045EC21 /* Color+CoresPersonalizadas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+CoresPersonalizadas.swift"; sourceTree = "<group>"; };
 		D9D5EAB325141E6C001C1C9E /* ArvoreAVL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArvoreAVL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9D5EAB625141E6C001C1C9E /* ArvoreAVLApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArvoreAVLApp.swift; sourceTree = "<group>"; };
 		D9D5EAB825141E6C001C1C9E /* ViewPrincipal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPrincipal.swift; sourceTree = "<group>"; };
@@ -43,6 +51,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D9440FF72514F1CD00A1694C /* Recursos */ = {
+			isa = PBXGroup;
+			children = (
+				D9440FF82514F1E900A1694C /* imagem_perfil.png */,
+			);
+			path = Recursos;
+			sourceTree = "<group>";
+		};
 		D9D5EAAA25141E6C001C1C9E = {
 			isa = PBXGroup;
 			children = (
@@ -62,13 +78,17 @@
 		D9D5EAB525141E6C001C1C9E /* ArvoreAVL */ = {
 			isa = PBXGroup;
 			children = (
+				D9440FF72514F1CD00A1694C /* Recursos */,
 				D9D5EAB625141E6C001C1C9E /* ArvoreAVLApp.swift */,
 				D9D5EAB825141E6C001C1C9E /* ViewPrincipal.swift */,
+				D994A616251650630045EC21 /* String+isInt.swift */,
 				D9D5EAD425145591001C1C9E /* ViewPrincipalViewModel.swift */,
+				D9440FF42514F18500A1694C /* ImageStore.swift */,
 				D9D5EAD725145C96001C1C9E /* DiagramaArvore.swift */,
 				D9D5EACD25144BDF001C1C9E /* No.swift */,
 				D9D5EAD025144FF0001C1C9E /* EstiloBordaComContorno.swift */,
 				D9D5EACA2514474B001C1C9E /* NoView.swift */,
+				D994A619251657D80045EC21 /* Color+CoresPersonalizadas.swift */,
 				D9D5EABA25141E6D001C1C9E /* Assets.xcassets */,
 				D9D5EABF25141E6D001C1C9E /* Info.plist */,
 				D9D5EABC25141E6D001C1C9E /* Preview Content */,
@@ -143,6 +163,7 @@
 			files = (
 				D9D5EABE25141E6D001C1C9E /* Preview Assets.xcassets in Resources */,
 				D9D5EABB25141E6D001C1C9E /* Assets.xcassets in Resources */,
+				D9440FF92514F1E900A1694C /* imagem_perfil.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,9 +176,12 @@
 			files = (
 				D9D5EACE25144BDF001C1C9E /* No.swift in Sources */,
 				D9D5EAD125144FF0001C1C9E /* EstiloBordaComContorno.swift in Sources */,
+				D994A61A251657D80045EC21 /* Color+CoresPersonalizadas.swift in Sources */,
 				D9D5EAB925141E6C001C1C9E /* ViewPrincipal.swift in Sources */,
+				D9440FF52514F18500A1694C /* ImageStore.swift in Sources */,
 				D9D5EAB725141E6C001C1C9E /* ArvoreAVLApp.swift in Sources */,
 				D9D5EAD825145C96001C1C9E /* DiagramaArvore.swift in Sources */,
+				D994A617251650630045EC21 /* String+isInt.swift in Sources */,
 				D9D5EAD525145591001C1C9E /* ViewPrincipalViewModel.swift in Sources */,
 				D9D5EACB2514474B001C1C9E /* NoView.swift in Sources */,
 			);

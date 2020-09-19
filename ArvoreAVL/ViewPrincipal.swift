@@ -12,7 +12,7 @@ struct ViewPrincipal: View {
     @State private var entrada = ""
     
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack/*(alignment: .leading)*/ {
             HStack {
                 VStack(alignment: .leading) {
                     Text("Árvore AVL de Inteiros 🌳")
@@ -22,7 +22,7 @@ struct ViewPrincipal: View {
                         
                     //Text("ACEITA INTEIROS DE -999 A 999")
                     Text("TRABALHO DO GRAU A - ESTRUTURAS AVANÇADAS DE DADOS I")
-                        .font(.subheadline)
+                        .font(.headline)
                         .foregroundColor(.gray)
                 }
                 .padding()
@@ -30,23 +30,38 @@ struct ViewPrincipal: View {
                 
                 Spacer()
                 
-                VStack(alignment: .trailing) {
+                HStack {
                     Text("Rafael Claycon Schmitt")
                         .font(.headline)
-                        .padding(.bottom, 1)
+                        .padding(.trailing, 2)
                         
 //                    Text("TRABALHO DO GRAU A - ESTRUTURAS AVANÇADAS DE DADOS I")
 //                        .font(.subheadline)
 //                        .foregroundColor(.gray)
+                    viewModel.imagemPerfil
+                        .resizable()
+                        .frame(width: 40, height: 40, alignment: .center)
                 }
-                .padding()
-                .padding(.leading, 10)
+                //.padding()
+                .padding(.trailing, 20)
             }
             
             Spacer()
             
+            DiagramaArvore(no: viewModel.raiz)
+                .frame(width: 1000, height: 500, alignment: .center)
+                .border(Color.red)
+            
+            Spacer()
+            
             VStack {
-                //Text("Essa é uma mensagem de status.")
+                HStack {
+                    Spacer()
+                    Text(viewModel.status)
+                    Spacer()
+                    Text("Caminhamento em Pré-Ordem:")
+                    Spacer()
+                }
                 
                 HStack {
                     Spacer()
@@ -58,8 +73,11 @@ struct ViewPrincipal: View {
                         .padding(.trailing, 20)
                     
                     Button(action: {
-                        viewModel.inserir(Int(entrada)!)
-                        print("Número adicionado à árvore.")
+                        if entrada.isInt {
+                            viewModel.inserir(Int(entrada)!)
+                            //print("Número adicionado à árvore.")
+                            entrada = ""
+                        }
                     }) {
                         HStack {
                             Image(systemName: "plus")
@@ -71,6 +89,7 @@ struct ViewPrincipal: View {
                     .padding(.trailing, 20)
                     
                     Button(action: {
+                        viewModel.inserir(Int(self.entrada)!)
                         print("Número adicionado à árvore.")
                     }) {
                         HStack {
@@ -94,7 +113,25 @@ struct ViewPrincipal: View {
                     .foregroundColor(.red)
                     .padding(.trailing, 20)
                     
+                    Button(action: {
+                        print("Número adicionado à árvore.")
+                    }) {
+                        HStack {
+                            Image(systemName: "figure.walk")
+                            Text("Tipo de caminhamento")
+                        }
+                    }
+                    .buttonStyle(EstiloBordaComContorno())
+                    .foregroundColor(Color(UIColor(red: 0.45, green: 0.22, blue: 0.06, alpha: 1.00)))
+                    .padding(.trailing, 20)
+                    
                     Spacer()
+                    
+//                    Toggle(isOn: $viewModel.mostarFatorBalanceamento) {
+//                        Text("Mostar fator de balanceamento")
+//                    }
+//                    .frame(width: 200)
+                    //.padding(.horizontal, 10)
                 }
                 .padding()
             }
