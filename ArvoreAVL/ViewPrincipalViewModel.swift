@@ -20,19 +20,15 @@ class ViewPrincipalViewModel: ObservableObject {
         } else {
             if valor < raiz!.valor {
                 if raiz?.esquerda == nil {
-                    objectWillChange.send()
                     raiz?.esquerda = No(pai: raiz, esquerda: nil, direita: nil, valor: valor)
                 } else {
-                    objectWillChange.send()
                     inserirEmSubarvore((raiz?.esquerda)!, valor)
                 }
                 raiz?.recalcularFatorBalanceamento()
             } else if valor > raiz!.valor {
                 if raiz?.direita == nil {
-                    objectWillChange.send()
                     raiz?.direita = No(pai: raiz, esquerda: nil, direita: nil, valor: valor)
                 } else {
-                    objectWillChange.send()
                     inserirEmSubarvore((raiz?.direita)!, valor)
                 }
                 raiz?.recalcularFatorBalanceamento()
@@ -44,6 +40,7 @@ class ViewPrincipalViewModel: ObservableObject {
         print(" ")
         print("----------------")
         verificaBalanceamento(raiz)
+        print(" ")
         imprime(raiz)
     }
     
@@ -98,18 +95,90 @@ class ViewPrincipalViewModel: ObservableObject {
         }
         
         if (no!.fatorBalanceamento < -1) || (no!.fatorBalanceamento > 1) {
-            print("Nó \(no!.valor) necessita balanceamento! F: \(no!.fatorBalanceamento)")
+            print("Nó \(no!.valor) necessita balanceamento!")
+            
+            // Rotação Simples à Direita
+            // Toda vez que uma sub-árvore fica com um fator
+            // POSITIVO e sua sub-árvore da esquerda também tem um fator POSITIVO
+            
+            // Rotação Dupla à Direita
+            // Toda vez que uma sub-árvore fica com um fator
+            // POSITIVO e sua sub-árvore da esquerda também tem um fator NEGATIVO
+            
+            if no!.fatorBalanceamento > 1 {
+                if no!.esquerda!.fatorBalanceamento > 0 {
+                    print("Rotação Simples à Direita")
+                    if no!.isRaiz {
+                        self.raiz = no!.esquerda
+                    }
+                    rotacaoSimplesADireita(no!)
+                    return
+                } else if no!.esquerda!.fatorBalanceamento < 0 {
+                    print("Rotação Dupla à Direita")
+                }
+            }
+            
+            // Rotação Simples à Esquerda
+            // Toda vez que uma sub-árvore fica com um fator
+            // NEGATIVO e sua sub-árvore da direita também tem um fator NEGATIVO
+            
+            // Rotação Dupla à Esquerda
+            // Toda vez que uma sub-árvore fica com um fator
+            // NEGATIVO e sua sub-árvore da direita também tem um fator POSITIVO
+            
+            if no!.fatorBalanceamento < -1 {
+                if no!.direita!.fatorBalanceamento > 0 {
+                    print("Rotação Dupla à Esquerda")
+                } else if no!.direita!.fatorBalanceamento < 0 {
+                    print("Rotação Simples à Esquerda")
+                    if no!.isRaiz {
+                        self.raiz = no!.direita
+                    }
+                    rotacaoSimplesAEsquerda(no!)
+                    return
+                }
+            }
         }
         
         verificaBalanceamento(no!.direita)
         verificaBalanceamento(no!.esquerda)
     }
     
-    func rotacaoSimplesAEsquerda() {
+    func rotacaoSimplesAEsquerda(_ a: No) {
+        // b - com certeza existe
+        let b = a.direita!
+        // c
+        //let c = b.direita
+        // d
+        let d = b.esquerda
         
+        b.pai = a.pai
+        a.pai = b
+        
+        a.direita = d
+        b.esquerda = a
     }
     
-    func rotacaoSimplesADireita() {
+    func rotacaoSimplesADireita(_ k2: No) {
+        // k1 - com certeza existe
+        let k1 = k2.esquerda!
+        // x
+        //let x = k1.esquerda
+        // y
+        let y = k1.direita
+        // z
+        let z = k2.direita
         
+        k1.pai = k2.pai
+        k2.pai = k1
+        
+        //k1.esquerda = x
+        k1.direita = k2
+        
+        k2.esquerda = y
+        k2.direita = z
+        
+        y?.pai = k2
+        z?.pai = k2
     }
 }

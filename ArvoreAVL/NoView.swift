@@ -8,24 +8,29 @@
 import SwiftUI
 
 struct NoView: View {
-    @State var valor: Int?
+    @State var valor: Int
+    @State var fator: Int
+    
+    let gradiente = LinearGradient(gradient: Gradient(colors: [.azulEscuro, .azulClaro]), startPoint: .topLeading, endPoint: .bottomTrailing)
     
     var body: some View {
-        if valor != nil {
-            ZStack {
-                Circle()
-                    .strokeBorder(Color.black, lineWidth: 1)
-                    //.background(Circle().foregroundColor(Color.azulClaro))
-                    .frame(width: 50, height: 50, alignment: .center)
-                
-                Text(String(self.valor!))
-                    .font(.body)
-            }
-        } else {
+        let corFator = fator < -1 || fator > 1 ? Color.red : Color.verdeEscuro
+        
+        ZStack {
             Circle()
-                .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [5]))
-                .foregroundColor(.gray)
+                //.strokeBorder(Color.black, lineWidth: 1)
+                .fill(gradiente)
                 .frame(width: 50, height: 50, alignment: .center)
+            
+            Text(String(self.valor))
+                .font(.body)
+                .foregroundColor(.white)
+            
+            Text(String(self.fator))
+                .font(.body)
+                //UIColor(red: 0.15, green: 0.49, blue: 0.86, alpha: 1.00).bold()
+                .foregroundColor(corFator)
+                .offset(x: -40.0)
         }
     }
 }
@@ -33,11 +38,10 @@ struct NoView: View {
 struct NoView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            NoView(valor: nil)
-            NoView(valor: 1)
-            NoView(valor: 10)
-            NoView(valor: 999)
+            NoView(valor: 1, fator: 0)
+            NoView(valor: 10, fator: 0)
+            NoView(valor: 999, fator: 0)
         }
-        .previewLayout(.fixed(width: 80, height: 80))
+        .previewLayout(.fixed(width: 100, height: 80))
     }
 }

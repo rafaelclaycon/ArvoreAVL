@@ -8,6 +8,7 @@
 import SwiftUI
 
 public extension Color {
-    static let azulClaro = Color(UIColor(red: 0.70, green: 0.85, blue: 0.98, alpha: 1.00))
-    static let azulEscuro = Color(UIColor(red: 0.09, green: 0.43, blue: 0.78, alpha: 1.00))
+    static let azulClaro = Color(UIColor(red: 0.15, green: 0.49, blue: 0.86, alpha: 1.00))
+    static let azulEscuro = Color(UIColor(red: 0.12, green: 0.31, blue: 0.65, alpha: 1.00))
+    static let verdeEscuro = Color(UIColor(red: 0.06, green: 0.50, blue: 0.06, alpha: 1.00))
 }

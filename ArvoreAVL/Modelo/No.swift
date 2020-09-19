@@ -13,6 +13,9 @@ class No {
     var direita: No?
     var valor: Int
     var fatorBalanceamento: Int
+    var isRaiz: Bool {
+        return pai == nil
+    }
     
     init(pai: No?, esquerda: No?, direita: No?, valor: Int) {
         self.pai = pai

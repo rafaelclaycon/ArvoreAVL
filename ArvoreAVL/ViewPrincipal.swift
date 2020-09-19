@@ -12,15 +12,15 @@ struct ViewPrincipal: View {
     @State private var entrada = ""
     
     var body: some View {
-        VStack/*(alignment: .leading)*/ {
+        VStack {
             HStack {
                 VStack(alignment: .leading) {
-                    Text("Árvore AVL de Inteiros 🌳")
-                        .font(.title)
+                    Text("Árvore AVL de Inteiros 🌳🍃")
+                        //.font(.largeTitle)
+                        .font(.system(.largeTitle, design: .serif))
                         .bold()
                         .padding(.bottom, 1)
                         
-                    //Text("ACEITA INTEIROS DE -999 A 999")
                     Text("TRABALHO DO GRAU A - ESTRUTURAS AVANÇADAS DE DADOS I")
                         .font(.headline)
                         .foregroundColor(.gray)
@@ -32,36 +32,34 @@ struct ViewPrincipal: View {
                 
                 HStack {
                     Text("Rafael Claycon Schmitt")
-                        .font(.headline)
-                        .padding(.trailing, 2)
-                        
-//                    Text("TRABALHO DO GRAU A - ESTRUTURAS AVANÇADAS DE DADOS I")
-//                        .font(.subheadline)
-//                        .foregroundColor(.gray)
+                        .font(.title3)
+                        .padding(.trailing, 8)
+                    
                     viewModel.imagemPerfil
                         .resizable()
                         .frame(width: 40, height: 40, alignment: .center)
                 }
-                //.padding()
                 .padding(.trailing, 20)
             }
             
             Spacer()
             
-            DiagramaArvore(no: viewModel.raiz)
-                .frame(width: 1000, height: 500, alignment: .center)
-                .border(Color.red)
+            if viewModel.mostarFatorBalanceamento {
+                DiagramaSubarvore(no: viewModel.raiz)
+                    //.frame(width: 1000, height: 500, alignment: .center)
+                    //.border(Color.red)
+            }
             
             Spacer()
             
             VStack {
-                HStack {
-                    Spacer()
+//                HStack {
+//                    Spacer()
                     Text(viewModel.status)
-                    Spacer()
-                    Text("Caminhamento em Pré-Ordem:")
-                    Spacer()
-                }
+//                    Spacer()
+//                    Text("Caminhamento em Pré-Ordem:")
+//                    Spacer()
+//                }
                 
                 HStack {
                     Spacer()
@@ -69,14 +67,16 @@ struct ViewPrincipal: View {
                     TextField("Número", text: $entrada)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
                         .keyboardType(.numberPad)
-                        .frame(width: 120)
+                        .frame(width: 100)
                         .padding(.trailing, 20)
                     
                     Button(action: {
                         if entrada.isInt {
+                            //viewModel.mostarFatorBalanceamento = false
                             viewModel.inserir(Int(entrada)!)
                             //print("Número adicionado à árvore.")
                             entrada = ""
+                            //viewModel.mostarFatorBalanceamento = true
                         }
                     }) {
                         HStack {
@@ -118,20 +118,22 @@ struct ViewPrincipal: View {
                     }) {
                         HStack {
                             Image(systemName: "figure.walk")
-                            Text("Tipo de caminhamento")
+                            Text("Caminhamento")
                         }
                     }
                     .buttonStyle(EstiloBordaComContorno())
                     .foregroundColor(Color(UIColor(red: 0.45, green: 0.22, blue: 0.06, alpha: 1.00)))
                     .padding(.trailing, 20)
                     
-                    Spacer()
+                    //Spacer()
                     
-//                    Toggle(isOn: $viewModel.mostarFatorBalanceamento) {
-//                        Text("Mostar fator de balanceamento")
-//                    }
-//                    .frame(width: 200)
+                    Toggle(isOn: $viewModel.mostarFatorBalanceamento) {
+                        Text("Mostar árvore")
+                    }
+                    .frame(width: 180)
                     //.padding(.horizontal, 10)
+                    
+                    Spacer()
                 }
                 .padding()
             }
