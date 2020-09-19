@@ -12,7 +12,9 @@ class No {
     var esquerda: No?
     var direita: No?
     var valor: Int
-    var fatorBalanceamento: Int
+    var fatorBalanceamento: Int {
+        return No.getAltura(esquerda) - No.getAltura(direita)
+    }
     var isRaiz: Bool {
         return pai == nil
     }
@@ -22,7 +24,6 @@ class No {
         self.esquerda = esquerda
         self.direita = direita
         self.valor = valor
-        self.fatorBalanceamento = No.getAltura(esquerda) - No.getAltura(direita)
     }
     
     static func getAltura(_ no: No?) -> Int {
@@ -38,9 +39,5 @@ class No {
                 return alturaDireita + 1
             }
         }
-    }
-    
-    func recalcularFatorBalanceamento() {
-        self.fatorBalanceamento = No.getAltura(esquerda) - No.getAltura(direita)
     }
 }

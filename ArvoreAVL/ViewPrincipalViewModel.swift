@@ -24,14 +24,12 @@ class ViewPrincipalViewModel: ObservableObject {
                 } else {
                     inserirEmSubarvore((raiz?.esquerda)!, valor)
                 }
-                raiz?.recalcularFatorBalanceamento()
             } else if valor > raiz!.valor {
                 if raiz?.direita == nil {
                     raiz?.direita = No(pai: raiz, esquerda: nil, direita: nil, valor: valor)
                 } else {
                     inserirEmSubarvore((raiz?.direita)!, valor)
                 }
-                raiz?.recalcularFatorBalanceamento()
             } else {
                 self.status = "O número \(valor) já existe na árvore."
             }
@@ -51,14 +49,12 @@ class ViewPrincipalViewModel: ObservableObject {
             } else {
                 inserirEmSubarvore((raiz.esquerda)!, valor)
             }
-            raiz.recalcularFatorBalanceamento()
         } else if valor > raiz.valor {
             if raiz.direita == nil {
                 raiz.direita = No(pai: raiz, esquerda: nil, direita: nil, valor: valor)
             } else {
                 inserirEmSubarvore((raiz.direita)!, valor)
             }
-            raiz.recalcularFatorBalanceamento()
         } else {
             self.status = "O número \(valor) já existe na árvore."
         }
