@@ -68,6 +68,7 @@ class ViewPrincipalViewModel: ObservableObject {
         }
         
         if (no!.fatorBalanceamento < -1) || (no!.fatorBalanceamento > 1) {
+            //self.status = "Nó \(no!.valor) necessita balanceamento!"
             print("Nó \(no!.valor) necessita balanceamento!")
             
             // Rotação Simples à Direita
@@ -80,6 +81,8 @@ class ViewPrincipalViewModel: ObservableObject {
             
             if no!.fatorBalanceamento > 1 {
                 if no!.esquerda!.fatorBalanceamento > 0 {
+                    self.status = "Rotação Simples à Direita aplicada!"
+                    
                     print("Rotação Simples à Direita")
                     if no!.isRaiz {
                         self.raiz = no!.esquerda
@@ -87,6 +90,8 @@ class ViewPrincipalViewModel: ObservableObject {
                     rotacaoSimplesADireita(no!)
                     return
                 } else if no!.esquerda!.fatorBalanceamento < 0 {
+                    self.status = "Rotação Dupla à Direita aplicada!"
+                    
                     print("Rotação Dupla à Direita")
                     if no!.isRaiz {
                         self.raiz = no!.esquerda!.direita
@@ -106,8 +111,12 @@ class ViewPrincipalViewModel: ObservableObject {
             
             if no!.fatorBalanceamento < -1 {
                 if no!.direita!.fatorBalanceamento > 0 {
+                    self.status = "Rotação Dupla à Esquerda aplicada!"
                     print("Rotação Dupla à Esquerda")
+                    
                 } else if no!.direita!.fatorBalanceamento < 0 {
+                    self.status = "Rotação Simples à Esquerda aplicada!"
+                    
                     print("Rotação Simples à Esquerda")
                     if no!.isRaiz {
                         self.raiz = no!.direita
