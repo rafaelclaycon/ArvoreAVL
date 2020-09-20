@@ -74,7 +74,7 @@ struct TelaPrincipal: View {
                             }
                         }
                         .buttonStyle(EstiloBordaComContorno())
-                        .foregroundColor(.green)
+                        .foregroundColor(.verde)
                         .padding(.trailing, 20)
                         
                         Button(action: {
