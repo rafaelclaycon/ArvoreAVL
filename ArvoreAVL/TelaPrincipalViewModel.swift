@@ -8,7 +8,7 @@
 import Combine
 import SwiftUI
 
-class ViewPrincipalViewModel: ObservableObject {
+class TelaPrincipalViewModel: ObservableObject {
     @Published var raiz: No? = nil
     @Published var imagemPerfil: Image = ImageStore.shared.image(name: "imagem_perfil")
     @Published var mostarFatorBalanceamento: Bool = true

@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct ViewPrincipal: View {
-    @ObservedObject var viewModel: ViewPrincipalViewModel
+struct TelaPrincipal: View {
+    @ObservedObject var viewModel: TelaPrincipalViewModel
     @State private var entrada = ""
     
     var body: some View {
@@ -141,8 +141,8 @@ struct ViewPrincipal: View {
     }
 }
 
-struct ViewPrincipal_Previews: PreviewProvider {
+struct TelaPrincipal_Previews: PreviewProvider {
     static var previews: some View {
-        ViewPrincipal(viewModel: ViewPrincipalViewModel())
+        TelaPrincipal(viewModel: TelaPrincipalViewModel())
     }
 }

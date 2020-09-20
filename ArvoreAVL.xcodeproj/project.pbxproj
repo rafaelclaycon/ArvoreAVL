@@ -12,13 +12,13 @@
 		D994A617251650630045EC21 /* String+isInt.swift in Sources */ = {isa = PBXBuildFile; fileRef = D994A616251650630045EC21 /* String+isInt.swift */; };
 		D994A61A251657D80045EC21 /* Color+CoresPersonalizadas.swift in Sources */ = {isa = PBXBuildFile; fileRef = D994A619251657D80045EC21 /* Color+CoresPersonalizadas.swift */; };
 		D9D5EAB725141E6C001C1C9E /* ArvoreAVLApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D5EAB625141E6C001C1C9E /* ArvoreAVLApp.swift */; };
-		D9D5EAB925141E6C001C1C9E /* ViewPrincipal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D5EAB825141E6C001C1C9E /* ViewPrincipal.swift */; };
+		D9D5EAB925141E6C001C1C9E /* TelaPrincipal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D5EAB825141E6C001C1C9E /* TelaPrincipal.swift */; };
 		D9D5EABB25141E6D001C1C9E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9D5EABA25141E6D001C1C9E /* Assets.xcassets */; };
 		D9D5EABE25141E6D001C1C9E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D9D5EABD25141E6D001C1C9E /* Preview Assets.xcassets */; };
 		D9D5EACB2514474B001C1C9E /* NoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D5EACA2514474B001C1C9E /* NoView.swift */; };
 		D9D5EACE25144BDF001C1C9E /* No.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D5EACD25144BDF001C1C9E /* No.swift */; };
 		D9D5EAD125144FF0001C1C9E /* EstiloBordaComContorno.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D5EAD025144FF0001C1C9E /* EstiloBordaComContorno.swift */; };
-		D9D5EAD525145591001C1C9E /* ViewPrincipalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D5EAD425145591001C1C9E /* ViewPrincipalViewModel.swift */; };
+		D9D5EAD525145591001C1C9E /* TelaPrincipalViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D5EAD425145591001C1C9E /* TelaPrincipalViewModel.swift */; };
 		D9D5EAD825145C96001C1C9E /* DiagramaSubarvore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9D5EAD725145C96001C1C9E /* DiagramaSubarvore.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,14 +29,14 @@
 		D994A619251657D80045EC21 /* Color+CoresPersonalizadas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+CoresPersonalizadas.swift"; sourceTree = "<group>"; };
 		D9D5EAB325141E6C001C1C9E /* ArvoreAVL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArvoreAVL.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D9D5EAB625141E6C001C1C9E /* ArvoreAVLApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArvoreAVLApp.swift; sourceTree = "<group>"; };
-		D9D5EAB825141E6C001C1C9E /* ViewPrincipal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPrincipal.swift; sourceTree = "<group>"; };
+		D9D5EAB825141E6C001C1C9E /* TelaPrincipal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaPrincipal.swift; sourceTree = "<group>"; };
 		D9D5EABA25141E6D001C1C9E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D9D5EABD25141E6D001C1C9E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		D9D5EABF25141E6D001C1C9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D9D5EABF25141E6D001C1C9E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ArvoreAVL/Apoio/Info.plist; sourceTree = SOURCE_ROOT; };
 		D9D5EACA2514474B001C1C9E /* NoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoView.swift; sourceTree = "<group>"; };
 		D9D5EACD25144BDF001C1C9E /* No.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = No.swift; sourceTree = "<group>"; };
 		D9D5EAD025144FF0001C1C9E /* EstiloBordaComContorno.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstiloBordaComContorno.swift; sourceTree = "<group>"; };
-		D9D5EAD425145591001C1C9E /* ViewPrincipalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewPrincipalViewModel.swift; sourceTree = "<group>"; };
+		D9D5EAD425145591001C1C9E /* TelaPrincipalViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelaPrincipalViewModel.swift; sourceTree = "<group>"; };
 		D9D5EAD725145C96001C1C9E /* DiagramaSubarvore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagramaSubarvore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -51,6 +51,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D9080D5B2518099100A31C8E /* Apoio */ = {
+			isa = PBXGroup;
+			children = (
+				D9D5EABA25141E6D001C1C9E /* Assets.xcassets */,
+				D9D5EABF25141E6D001C1C9E /* Info.plist */,
+				D994A616251650630045EC21 /* String+isInt.swift */,
+				D9440FF42514F18500A1694C /* ImageStore.swift */,
+				D9D5EAD025144FF0001C1C9E /* EstiloBordaComContorno.swift */,
+				D994A619251657D80045EC21 /* Color+CoresPersonalizadas.swift */,
+				D9D5EAB625141E6C001C1C9E /* ArvoreAVLApp.swift */,
+			);
+			path = Apoio;
+			sourceTree = "<group>";
+		};
+		D9080D5E25180A9D00A31C8E /* Views Arvore */ = {
+			isa = PBXGroup;
+			children = (
+				D9D5EAD725145C96001C1C9E /* DiagramaSubarvore.swift */,
+				D9D5EACA2514474B001C1C9E /* NoView.swift */,
+			);
+			path = "Views Arvore";
+			sourceTree = "<group>";
+		};
 		D9440FF72514F1CD00A1694C /* Recursos */ = {
 			isa = PBXGroup;
 			children = (
@@ -87,18 +110,11 @@
 			isa = PBXGroup;
 			children = (
 				D980E9672516782400050797 /* Modelo */,
+				D9D5EAB825141E6C001C1C9E /* TelaPrincipal.swift */,
+				D9D5EAD425145591001C1C9E /* TelaPrincipalViewModel.swift */,
+				D9080D5E25180A9D00A31C8E /* Views Arvore */,
+				D9080D5B2518099100A31C8E /* Apoio */,
 				D9440FF72514F1CD00A1694C /* Recursos */,
-				D9D5EAB625141E6C001C1C9E /* ArvoreAVLApp.swift */,
-				D9D5EAB825141E6C001C1C9E /* ViewPrincipal.swift */,
-				D994A616251650630045EC21 /* String+isInt.swift */,
-				D9D5EAD425145591001C1C9E /* ViewPrincipalViewModel.swift */,
-				D9440FF42514F18500A1694C /* ImageStore.swift */,
-				D9D5EAD725145C96001C1C9E /* DiagramaSubarvore.swift */,
-				D9D5EAD025144FF0001C1C9E /* EstiloBordaComContorno.swift */,
-				D9D5EACA2514474B001C1C9E /* NoView.swift */,
-				D994A619251657D80045EC21 /* Color+CoresPersonalizadas.swift */,
-				D9D5EABA25141E6D001C1C9E /* Assets.xcassets */,
-				D9D5EABF25141E6D001C1C9E /* Info.plist */,
 				D9D5EABC25141E6D001C1C9E /* Preview Content */,
 			);
 			path = ArvoreAVL;
@@ -185,12 +201,12 @@
 				D9D5EACE25144BDF001C1C9E /* No.swift in Sources */,
 				D9D5EAD125144FF0001C1C9E /* EstiloBordaComContorno.swift in Sources */,
 				D994A61A251657D80045EC21 /* Color+CoresPersonalizadas.swift in Sources */,
-				D9D5EAB925141E6C001C1C9E /* ViewPrincipal.swift in Sources */,
+				D9D5EAB925141E6C001C1C9E /* TelaPrincipal.swift in Sources */,
 				D9440FF52514F18500A1694C /* ImageStore.swift in Sources */,
 				D9D5EAB725141E6C001C1C9E /* ArvoreAVLApp.swift in Sources */,
 				D9D5EAD825145C96001C1C9E /* DiagramaSubarvore.swift in Sources */,
 				D994A617251650630045EC21 /* String+isInt.swift in Sources */,
-				D9D5EAD525145591001C1C9E /* ViewPrincipalViewModel.swift in Sources */,
+				D9D5EAD525145591001C1C9E /* TelaPrincipalViewModel.swift in Sources */,
 				D9D5EACB2514474B001C1C9E /* NoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -323,7 +339,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ArvoreAVL/Preview Content\"";
 				DEVELOPMENT_TEAM = L8X3H5XA82;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = ArvoreAVL/Info.plist;
+				INFOPLIST_FILE = ArvoreAVL/Apoio/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -345,7 +361,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ArvoreAVL/Preview Content\"";
 				DEVELOPMENT_TEAM = L8X3H5XA82;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = ArvoreAVL/Info.plist;
+				INFOPLIST_FILE = ArvoreAVL/Apoio/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
