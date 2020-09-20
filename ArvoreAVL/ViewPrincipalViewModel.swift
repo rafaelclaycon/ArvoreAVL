@@ -14,6 +14,7 @@ class ViewPrincipalViewModel: ObservableObject {
     @Published var mostarFatorBalanceamento: Bool = true
     @Published var status: String = ""
     
+    // MARK: - Inserção
     func inserir(_ valor: Int) {
         if raiz == nil {
             raiz = No(pai: nil, esquerda: nil, direita: nil, valor: valor)
@@ -60,31 +61,7 @@ class ViewPrincipalViewModel: ObservableObject {
         }
     }
     
-    func imprime(_ no: No?) {
-        if no == nil {
-            return
-        }
-        
-        var valorPai = " "
-        if no!.pai != nil {
-            valorPai = "\(no!.pai!.valor)"
-        }
-        
-        var valorEsquerda = " "
-        if no!.esquerda != nil {
-            valorEsquerda = "\(no!.esquerda!.valor)"
-        }
-        
-        var valorDireita = " "
-        if no!.direita != nil {
-            valorDireita = "\(no!.direita!.valor)"
-        }
-        
-        print("(\(no!.valor)) - ^: \(valorPai), E: \(valorEsquerda), D: \(valorDireita), F: \(no!.fatorBalanceamento)")
-        imprime(no!.direita)
-        imprime(no!.esquerda)
-    }
-    
+    // MARK: - Balanceamento
     func verificaBalanceamento(_ no: No?) {
         if no == nil {
             return
@@ -114,7 +91,7 @@ class ViewPrincipalViewModel: ObservableObject {
                     if no!.isRaiz {
                         self.raiz = no!.esquerda!.direita
                     }
-                    rotacaoDuplaADireita(no!)
+                    rotacaoDuplaADireita(no!, pai: no!.pai)
                     return
                 }
             }
@@ -183,7 +160,7 @@ class ViewPrincipalViewModel: ObservableObject {
         z?.pai = k2
     }
     
-    func rotacaoDuplaADireita(_ k3: No) {
+    func rotacaoDuplaADireita(_ k3: No, pai: No?) {
         let k1 = k3.esquerda!
         let k2 = k1.direita!
         //let a = k1.esquerda
@@ -206,5 +183,35 @@ class ViewPrincipalViewModel: ObservableObject {
         
         k3.pai = k2
         k3.esquerda = c
+        
+        if pai != nil {
+            pai!.esquerda = k2
+        }
+    }
+    
+    // MARK: - Funções auxiliares
+    func imprime(_ no: No?) {
+        if no == nil {
+            return
+        }
+        
+        var valorPai = " "
+        if no!.pai != nil {
+            valorPai = "\(no!.pai!.valor)"
+        }
+        
+        var valorEsquerda = " "
+        if no!.esquerda != nil {
+            valorEsquerda = "\(no!.esquerda!.valor)"
+        }
+        
+        var valorDireita = " "
+        if no!.direita != nil {
+            valorDireita = "\(no!.direita!.valor)"
+        }
+        
+        print("(\(no!.valor)) - ^: \(valorPai), E: \(valorEsquerda), D: \(valorDireita), F: \(no!.fatorBalanceamento)")
+        imprime(no!.direita)
+        imprime(no!.esquerda)
     }
 }
