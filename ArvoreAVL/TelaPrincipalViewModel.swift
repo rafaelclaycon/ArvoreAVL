@@ -13,6 +13,7 @@ class TelaPrincipalViewModel: ObservableObject {
     @Published var imagemPerfil: Image = ImageStore.shared.image(name: "imagem_perfil")
     @Published var mostarFatorBalanceamento: Bool = true
     @Published var status: String = ""
+    @Published var mostarTextoInformativo: Bool = false
     
     // MARK: - Inserção
     func inserir(_ valor: Int) {
@@ -81,7 +82,7 @@ class TelaPrincipalViewModel: ObservableObject {
             
             if no!.fatorBalanceamento > 1 {
                 if no!.esquerda!.fatorBalanceamento > 0 {
-                    self.status = "Rotação Simples à Direita aplicada!"
+                    exibirTextoInformativo("Rotação Simples à Direita aplicada.")
                     
                     print("Rotação Simples à Direita")
                     if no!.isRaiz {
@@ -90,7 +91,7 @@ class TelaPrincipalViewModel: ObservableObject {
                     rotacaoSimplesADireita(no!)
                     return
                 } else if no!.esquerda!.fatorBalanceamento < 0 {
-                    self.status = "Rotação Dupla à Direita aplicada!"
+                    exibirTextoInformativo("Rotação Dupla à Direita aplicada.")
                     
                     print("Rotação Dupla à Direita")
                     if no!.isRaiz {
@@ -111,11 +112,11 @@ class TelaPrincipalViewModel: ObservableObject {
             
             if no!.fatorBalanceamento < -1 {
                 if no!.direita!.fatorBalanceamento > 0 {
-                    self.status = "Rotação Dupla à Esquerda aplicada!"
+                    exibirTextoInformativo("Rotação Dupla à Esquerda aplicada.")
                     print("Rotação Dupla à Esquerda")
                     
                 } else if no!.direita!.fatorBalanceamento < 0 {
-                    self.status = "Rotação Simples à Esquerda aplicada!"
+                    exibirTextoInformativo("Rotação Simples à Esquerda aplicada.")
                     
                     print("Rotação Simples à Esquerda")
                     if no!.isRaiz {
@@ -222,5 +223,17 @@ class TelaPrincipalViewModel: ObservableObject {
         print("(\(no!.valor)) - ^: \(valorPai), E: \(valorEsquerda), D: \(valorDireita), F: \(no!.fatorBalanceamento)")
         imprime(no!.direita)
         imprime(no!.esquerda)
+    }
+    
+    func exibirTextoInformativo(_ texto: String) {
+        self.status = texto
+        
+        self.mostarTextoInformativo = true
+        
+        _ = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { timer in
+            DispatchQueue.main.async {
+                self.mostarTextoInformativo = false
+            }
+        }
     }
 }
