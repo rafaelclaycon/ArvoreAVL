@@ -61,6 +61,7 @@ struct TelaPrincipal: View {
                             .frame(width: 100)
                             .padding(.trailing, 20)
                         
+                        // INSERÇÃO
                         Button(action: {
                             if entrada.isInt {
                                 viewModel.inserir(Int(entrada)!)
@@ -77,6 +78,7 @@ struct TelaPrincipal: View {
                         .foregroundColor(.verde)
                         .padding(.trailing, 20)
                         
+                        // BUSCA
                         Button(action: {
                             if entrada.isInt {
                                 viewModel.buscar(valor: Int(self.entrada)!)
@@ -92,7 +94,9 @@ struct TelaPrincipal: View {
                         .buttonStyle(EstiloBordaComContorno())
                         .foregroundColor(.blue)
                         .padding(.trailing, 20)
+                        .disabled(viewModel.arvoreVazia)
                         
+                        // REMOÇÃO
                         Button(action: {
                             if entrada.isInt {
                                 //viewModel.remover(valor: Int(self.entrada)!)
@@ -108,8 +112,11 @@ struct TelaPrincipal: View {
                         .buttonStyle(EstiloBordaComContorno())
                         .foregroundColor(.red)
                         .padding(.trailing, 20)
+                        .disabled(viewModel.arvoreVazia)
                         
+                        // CAMINHAMENTO
                         Button(action: {
+                            viewModel.exibindoOpcoesCaminhamento = true
                             //print("Número adicionado à árvore.")
                         }) {
                             HStack {
@@ -120,6 +127,15 @@ struct TelaPrincipal: View {
                         .buttonStyle(EstiloBordaComContorno())
                         .foregroundColor(Color(UIColor(red: 0.45, green: 0.22, blue: 0.06, alpha: 1.00)))
                         .padding(.trailing, 20)
+                        .disabled(viewModel.arvoreVazia)
+                        .actionSheet(isPresented: $viewModel.exibindoOpcoesCaminhamento) {
+                            ActionSheet(title: Text("Escolha um tipo de caminhamento:"),
+                                        message: nil,
+                                        buttons: [.default(Text("↩️  Pré-Ordem")) { viewModel.exibirCaminhamentoPreOrdem() },
+                                                  .default(Text("↪️  Pós-Ordem")) { viewModel.exibirCaminhamentoPosOrdem() },
+                                                  .default(Text("🔢  Em-Ordem")) { viewModel.exibirCaminhamentoEmOrdem() },
+                                                  .cancel(Text("Cancelar"))])
+                        }
                         
                         Toggle(isOn: $viewModel.mostarFatorBalanceamento) {
                             Text("Mostar árvore")

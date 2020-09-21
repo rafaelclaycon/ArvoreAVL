@@ -14,9 +14,12 @@ class TelaPrincipalViewModel: ObservableObject {
     @Published var mostarFatorBalanceamento: Bool = true
     @Published var status: String = ""
     @Published var mostarTextoInformativo: Bool = false
+    @Published var exibindoOpcoesCaminhamento = false
     
-    // Variáveis privadas
     var nosConsultados = [String]()
+    var arvoreVazia: Bool {
+        return raiz == nil
+    }
     
     // MARK: - Inserção
     func inserir(_ valor: Int) {
@@ -245,6 +248,20 @@ class TelaPrincipalViewModel: ObservableObject {
             return buscarNaSubarvore(valor, no.direita)
         }
         return true
+    }
+    
+    // MARK: - Caminhamento
+    
+    func exibirCaminhamentoPreOrdem() {
+        
+    }
+    
+    func exibirCaminhamentoPosOrdem() {
+        
+    }
+    
+    func exibirCaminhamentoEmOrdem() {
+        
     }
     
     // MARK: - Funções auxiliares
