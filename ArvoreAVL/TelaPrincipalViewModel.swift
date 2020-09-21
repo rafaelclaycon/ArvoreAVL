@@ -15,6 +15,9 @@ class TelaPrincipalViewModel: ObservableObject {
     @Published var status: String = ""
     @Published var mostarTextoInformativo: Bool = false
     
+    // Variáveis privadas
+    var nosConsultados = [String]()
+    
     // MARK: - Inserção
     func inserir(_ valor: Int) {
         if raiz == nil {
@@ -33,7 +36,7 @@ class TelaPrincipalViewModel: ObservableObject {
                     inserirEmSubarvore((raiz?.direita)!, valor)
                 }
             } else {
-                self.status = "O número \(valor) já existe na árvore."
+                exibirTextoInformativo("O número \(valor) já existe na árvore.")
             }
         }
         
@@ -58,7 +61,7 @@ class TelaPrincipalViewModel: ObservableObject {
                 inserirEmSubarvore((raiz.direita)!, valor)
             }
         } else {
-            self.status = "O número \(valor) já existe na árvore."
+            exibirTextoInformativo("O número \(valor) já existe na árvore.")
         }
     }
     
@@ -199,6 +202,51 @@ class TelaPrincipalViewModel: ObservableObject {
         }
     }
     
+    // MARK: - Busca
+    func buscar(valor: Int) {
+        if raiz == nil {
+            exibirTextoInformativo("☹️  O número consultado não está na árvore pois a árvore está vazia.")
+        } else {
+            self.nosConsultados.append("\(raiz!.valor)")
+            
+            if valor == raiz!.valor {
+                exibirTextoInformativo("🎉  O número \(valor) está na árvore. Nós consultados: " + self.nosConsultados.joined(separator: ", "))
+            } else {
+                var no: No?
+                if valor < raiz!.valor {
+                    no = raiz!.esquerda
+                } else {
+                    no = raiz!.direita
+                }
+                
+                let encontrado = buscarNaSubarvore(valor, no)
+                
+                if encontrado {
+                    exibirTextoInformativo("🎉  O número \(valor) está na árvore. Nós consultados: " + self.nosConsultados.joined(separator: ", "))
+                } else {
+                    exibirTextoInformativo("☹️  O número \(valor) não está na árvore. Nós consultados: " + self.nosConsultados.joined(separator: ", "))
+                }
+            }
+            // Limpa o array que guarda o caminho percorrido pela pesquisa.
+            self.nosConsultados.removeAll()
+        }
+    }
+    
+    func buscarNaSubarvore(_ valor: Int, _ no: No?) -> Bool {
+        guard let no = no else {
+            return false
+        }
+        
+        self.nosConsultados.append("\(no.valor)")
+        
+        if valor < no.valor {
+            return buscarNaSubarvore(valor, no.esquerda)
+        } else if valor > no.valor {
+            return buscarNaSubarvore(valor, no.direita)
+        }
+        return true
+    }
+    
     // MARK: - Funções auxiliares
     func imprime(_ no: No?) {
         if no == nil {
@@ -230,7 +278,7 @@ class TelaPrincipalViewModel: ObservableObject {
         
         self.mostarTextoInformativo = true
         
-        _ = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false) { timer in
+        _ = Timer.scheduledTimer(withTimeInterval: 15.0, repeats: false) { timer in
             DispatchQueue.main.async {
                 self.mostarTextoInformativo = false
             }

@@ -78,8 +78,11 @@ struct TelaPrincipal: View {
                         .padding(.trailing, 20)
                         
                         Button(action: {
-                            viewModel.inserir(Int(self.entrada)!)
-                            print("Número adicionado à árvore.")
+                            if entrada.isInt {
+                                viewModel.buscar(valor: Int(self.entrada)!)
+                                //print("Número adicionado à árvore.")
+                                entrada = ""
+                            }
                         }) {
                             HStack {
                                 Image(systemName: "magnifyingglass")
@@ -91,7 +94,11 @@ struct TelaPrincipal: View {
                         .padding(.trailing, 20)
                         
                         Button(action: {
-                            print("Número adicionado à árvore.")
+                            if entrada.isInt {
+                                //viewModel.remover(valor: Int(self.entrada)!)
+                                //print("Número removido da árvore.")
+                                entrada = ""
+                            }
                         }) {
                             HStack {
                                 Image(systemName: "minus")
@@ -103,7 +110,7 @@ struct TelaPrincipal: View {
                         .padding(.trailing, 20)
                         
                         Button(action: {
-                            print("Número adicionado à árvore.")
+                            //print("Número adicionado à árvore.")
                         }) {
                             HStack {
                                 Image(systemName: "figure.walk")
@@ -127,7 +134,7 @@ struct TelaPrincipal: View {
             }
             if viewModel.mostarTextoInformativo {
                 Text(viewModel.status)
-                    .offset(y: 285)
+                    .offset(y: 270)
             }
         }
     }
