@@ -55,10 +55,12 @@ struct TelaPrincipal: View {
                     HStack {
                         Spacer()
                         
-                        TextField("Número", text: $entrada)
+                        Text("Número:")
+                        
+                        TextField("", text: $entrada)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .keyboardType(.numberPad)
-                            .frame(width: 100)
+                            .frame(width: 50)
                             .padding(.trailing, 20)
                         
                         // INSERÇÃO
