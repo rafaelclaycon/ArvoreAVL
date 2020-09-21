@@ -60,8 +60,8 @@ struct TelaPrincipal: View {
                         TextField("", text: $entrada)
                             .textFieldStyle(RoundedBorderTextFieldStyle())
                             .keyboardType(.numberPad)
-                            .frame(width: 50)
-                            .padding(.trailing, 20)
+                            .frame(width: 60)
+                            .padding(.trailing, 30)
                         
                         // INSERÇÃO
                         Button(action: {
@@ -142,8 +142,8 @@ struct TelaPrincipal: View {
                         Toggle(isOn: $viewModel.mostarFatorBalanceamento) {
                             Text("Mostar árvore")
                         }
-                        .frame(width: 180)
-                        //.padding(.horizontal, 10)
+                        .frame(width: 170)
+                        .padding(.leading, 10)
                         
                         Spacer()
                     }

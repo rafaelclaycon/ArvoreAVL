@@ -16,5 +16,7 @@ struct EstiloBordaComContorno: ButtonStyle {
                 RoundedRectangle(cornerRadius: 10.0)
                     .stroke(lineWidth: 1.0)
             )
+            .opacity(configuration.isPressed ? 0.7 : 1.0)
+            .scaleEffect(configuration.isPressed ? 0.97 : 1.0)
     }
 }
