@@ -11,7 +11,7 @@ import SwiftUI
 class TelaPrincipalViewModel: ObservableObject {
     @Published var raiz: No? = nil
     @Published var imagemPerfil: Image = ImageStore.shared.image(name: "imagem_perfil")
-    @Published var mostarFatorBalanceamento: Bool = true
+    @Published var mostarArvore: Bool = true
     @Published var status: String = ""
     @Published var mostarTextoInformativo: Bool = false
     @Published var exibindoOpcoesCaminhamento = false

@@ -44,7 +44,7 @@ struct TelaPrincipal: View {
                 
                 Spacer()
                 
-                if viewModel.mostarFatorBalanceamento {
+                if viewModel.mostarArvore {
                     DiagramaSubarvore(no: viewModel.raiz)
                         //.border(Color.red)
                 }
@@ -139,7 +139,7 @@ struct TelaPrincipal: View {
                                                   .cancel(Text("Cancelar"))])
                         }
                         
-                        Toggle(isOn: $viewModel.mostarFatorBalanceamento) {
+                        Toggle(isOn: $viewModel.mostarArvore) {
                             Text("Mostar árvore")
                         }
                         .frame(width: 170)
