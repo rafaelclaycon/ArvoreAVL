@@ -16,10 +16,11 @@ class TelaPrincipalViewModel: ObservableObject {
     @Published var mostarTextoInformativo: Bool = false
     @Published var exibindoOpcoesCaminhamento = false
     
-    var nosConsultados = [String]()
     var arvoreVazia: Bool {
         return raiz == nil
     }
+    private var nosConsultados = [String]()
+    private var caminhamento = [String]()
     
     // MARK: - Inserção
     func inserir(_ valor: Int) {
@@ -253,15 +254,63 @@ class TelaPrincipalViewModel: ObservableObject {
     // MARK: - Caminhamento
     
     func exibirCaminhamentoPreOrdem() {
-        
+        guard let raiz = raiz else {
+            return exibirTextoInformativo("Não é possível exibir o caminhamento pois a árvore está vazia.")
+        }
+        if !self.caminhamento.isEmpty {
+            self.caminhamento.removeAll()
+        }
+        subarvorePreOrdem(raiz)
+        exibirTextoInformativo("🥾  Caminhamento em Pré-Ordem: " + self.caminhamento.joined(separator: ", "))
     }
     
     func exibirCaminhamentoPosOrdem() {
-        
+        guard let raiz = raiz else {
+            return exibirTextoInformativo("Não é possível exibir o caminhamento pois a árvore está vazia.")
+        }
+        if !self.caminhamento.isEmpty {
+            self.caminhamento.removeAll()
+        }
+        subarvorePosOrdem(raiz)
+        exibirTextoInformativo("🥾  Caminhamento em Pós-Ordem: " + self.caminhamento.joined(separator: ", "))
     }
     
     func exibirCaminhamentoEmOrdem() {
-        
+        guard let raiz = raiz else {
+            return exibirTextoInformativo("Não é possível exibir o caminhamento pois a árvore está vazia.")
+        }
+        if !self.caminhamento.isEmpty {
+            self.caminhamento.removeAll()
+        }
+        subarvoreEmOrdem(raiz)
+        exibirTextoInformativo("🥾  Caminhamento Em Ordem: " + self.caminhamento.joined(separator: ", "))
+    }
+    
+    func subarvorePreOrdem(_ no: No?) {
+        guard let no = no else {
+            return
+        }
+        caminhamento.append("\(no.valor)")
+        subarvorePreOrdem(no.esquerda)
+        subarvorePreOrdem(no.direita)
+    }
+    
+    func subarvorePosOrdem(_ no: No?) {
+        guard let no = no else {
+            return
+        }
+        subarvorePosOrdem(no.esquerda)
+        subarvorePosOrdem(no.direita)
+        caminhamento.append("\(no.valor)")
+    }
+    
+    func subarvoreEmOrdem(_ no: No?) {
+        guard let no = no else {
+            return
+        }
+        subarvoreEmOrdem(no.esquerda)
+        caminhamento.append("\(no.valor)")
+        subarvoreEmOrdem(no.direita)
     }
     
     // MARK: - Funções auxiliares
@@ -295,10 +344,10 @@ class TelaPrincipalViewModel: ObservableObject {
         
         self.mostarTextoInformativo = true
         
-        _ = Timer.scheduledTimer(withTimeInterval: 15.0, repeats: false) { timer in
-            DispatchQueue.main.async {
-                self.mostarTextoInformativo = false
-            }
-        }
+//        _ = Timer.scheduledTimer(withTimeInterval: 15.0, repeats: false) { timer in
+//            DispatchQueue.main.async {
+//                self.mostarTextoInformativo = false
+//            }
+//        }
     }
 }
