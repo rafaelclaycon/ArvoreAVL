@@ -49,7 +49,7 @@ class TelaPrincipalViewModel: ObservableObject {
         
         print(" ")
         print("----------------")
-        verificaBalanceamento(raiz)
+        verificaBalanceamento(raiz, executarBalanceamento: true)
         print(" ")
         imprime(raiz)
         
@@ -77,7 +77,7 @@ class TelaPrincipalViewModel: ObservableObject {
     }
     
     // MARK: - Balanceamento
-    func verificaBalanceamento(_ no: No?) {
+    func verificaBalanceamento(_ no: No?, executarBalanceamento: Bool) {
         guard let noAtual = no else {
             return
         }
@@ -98,19 +98,27 @@ class TelaPrincipalViewModel: ObservableObject {
                 if noAtual.esquerda!.fatorBalanceamento > 0 {
                     print("Rotação Simples à Direita")
 
-                    rotacaoSimplesADireita(noAtual)
+                    if executarBalanceamento {
+                        rotacaoSimplesADireita(noAtual)
+                        adicionarAoTextoInformativo("Rotação Simples à Direita aplicada.")
+                    } else {
+                        exibirTextoInformativo("Executaria uma Rotação Simples à Direita no nó \(noAtual.valor).")
+                    }
                     
-                    adicionarAoTextoInformativo("Rotação Simples à Direita aplicada.")
                     return
                 } else if noAtual.esquerda!.fatorBalanceamento < 0 {
                     print("Rotação Dupla à Direita")
                     
-                    if noAtual.isRaiz {
-                        self.raiz = noAtual.esquerda!.direita
+                    if executarBalanceamento {
+                        if noAtual.isRaiz {
+                            self.raiz = noAtual.esquerda!.direita
+                        }
+                        rotacaoDuplaADireita(noAtual, pai: noAtual.pai)
+                        adicionarAoTextoInformativo("Rotação Dupla à Direita aplicada.")
+                    } else {
+                        exibirTextoInformativo("Executaria uma Rotação Dupla à Direita no nó \(noAtual.valor).")
                     }
-                    rotacaoDuplaADireita(noAtual, pai: noAtual.pai)
                     
-                    adicionarAoTextoInformativo("Rotação Dupla à Direita aplicada.")
                     return
                 }
             }
@@ -127,23 +135,29 @@ class TelaPrincipalViewModel: ObservableObject {
                 if noAtual.direita!.fatorBalanceamento > 0 {
                     print("Rotação Dupla à Esquerda")
                     
-                    // TODO: Implementar!
-                    rotacaoDuplaAEsquerda()
-                    
-                    adicionarAoTextoInformativo("Rotação Dupla à Esquerda aplicada.")
+                    if executarBalanceamento {
+                        // TODO: Implementar!
+                        rotacaoDuplaAEsquerda()
+                        adicionarAoTextoInformativo("Rotação Dupla à Esquerda aplicada.")
+                    } else {
+                        exibirTextoInformativo("Executaria uma Rotação Dupla à Esquerda no nó \(noAtual.valor).")
+                    }
                 } else if noAtual.direita!.fatorBalanceamento < 0 {
                     print("Rotação Simples à Esquerda")
                     
-                    rotacaoSimplesAEsquerda(noAtual)
-                    
-                    adicionarAoTextoInformativo("Rotação Simples à Esquerda aplicada.")
+                    if executarBalanceamento {
+                        rotacaoSimplesAEsquerda(noAtual)
+                        adicionarAoTextoInformativo("Rotação Simples à Esquerda aplicada.")
+                    } else {
+                        exibirTextoInformativo("Executaria uma Rotação Simples à Esquerda no nó \(noAtual.valor).")
+                    }
                     return
                 }
             }
         }
         
-        verificaBalanceamento(noAtual.direita)
-        verificaBalanceamento(noAtual.esquerda)
+        verificaBalanceamento(noAtual.direita, executarBalanceamento: executarBalanceamento)
+        verificaBalanceamento(noAtual.esquerda, executarBalanceamento: executarBalanceamento)
     }
     
     func rotacaoSimplesAEsquerda(_ a: No) {
@@ -162,7 +176,12 @@ class TelaPrincipalViewModel: ObservableObject {
         if a.isRaiz {
             self.raiz = b
         } else {
-            a.pai!.direita = b
+            switch a.orientacaoEmRelacaoAoPai {
+            case .esquerda:
+                a.pai!.esquerda = b
+            default:
+                a.pai!.direita = b
+            }
         }
         
         b.pai = a.pai
@@ -347,7 +366,9 @@ class TelaPrincipalViewModel: ObservableObject {
             }
         }
         
-        verificaBalanceamento(noASerRemovido.pai)
+        verificaBalanceamento(noASerRemovido.pai, executarBalanceamento: true)
+        
+        self.mostarArvore = false
     }
     
     func getNo(comValor valor: Int, aPartirDe no: No?) -> No? {
