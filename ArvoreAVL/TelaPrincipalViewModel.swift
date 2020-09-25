@@ -27,11 +27,13 @@ class TelaPrincipalViewModel: ObservableObject {
         if raiz == nil {
             raiz = No(pai: nil, esquerda: nil, direita: nil, valor: valor)
             exibirTextoInformativo("O número \(valor) foi inserido.")
+            self.mostarArvore = false
         } else {
             if valor < raiz!.valor {
                 if raiz?.esquerda == nil {
                     raiz?.esquerda = No(pai: raiz, esquerda: nil, direita: nil, valor: valor)
                     exibirTextoInformativo("O número \(valor) foi inserido.")
+                    self.mostarArvore = false
                 } else {
                     inserirEmSubarvore((raiz?.esquerda)!, valor)
                 }
@@ -39,6 +41,7 @@ class TelaPrincipalViewModel: ObservableObject {
                 if raiz?.direita == nil {
                     raiz?.direita = No(pai: raiz, esquerda: nil, direita: nil, valor: valor)
                     exibirTextoInformativo("O número \(valor) foi inserido.")
+                    self.mostarArvore = false
                 } else {
                     inserirEmSubarvore((raiz?.direita)!, valor)
                 }
@@ -46,14 +49,7 @@ class TelaPrincipalViewModel: ObservableObject {
                 exibirTextoInformativo("O número \(valor) já existe na árvore.")
             }
         }
-        
-        print(" ")
-        print("----------------")
         verificarBalanceamento(raiz, balancear: true)
-        print(" ")
-        imprimir(raiz)
-        
-        self.mostarArvore = false
     }
     
     func inserirEmSubarvore(_ raiz: No, _ valor: Int) {
@@ -61,6 +57,7 @@ class TelaPrincipalViewModel: ObservableObject {
             if raiz.esquerda == nil {
                 raiz.esquerda = No(pai: raiz, esquerda: nil, direita: nil, valor: valor)
                 exibirTextoInformativo("O número \(valor) foi inserido.")
+                self.mostarArvore = false
             } else {
                 inserirEmSubarvore((raiz.esquerda)!, valor)
             }
@@ -68,6 +65,7 @@ class TelaPrincipalViewModel: ObservableObject {
             if raiz.direita == nil {
                 raiz.direita = No(pai: raiz, esquerda: nil, direita: nil, valor: valor)
                 exibirTextoInformativo("O número \(valor) foi inserido.")
+                self.mostarArvore = false
             } else {
                 inserirEmSubarvore((raiz.direita)!, valor)
             }
@@ -85,9 +83,9 @@ class TelaPrincipalViewModel: ObservableObject {
         verificarBalanceamento(noAtual.esquerda, balancear: balancear)
         verificarBalanceamento(noAtual.direita, balancear: balancear)
         
-        print("Nó \(noAtual.valor) consultado para balanceamento. Fator: \(noAtual.fatorBalanceamento)")
+        print("\(noAtual.valor) consultado para balanceamento. F: \(noAtual.fatorBalanceamento)")
+        
         if (noAtual.fatorBalanceamento < -1) || (noAtual.fatorBalanceamento > 1) {
-            //self.status = "Nó \(no!.valor) necessita balanceamento!"
             print("Nó \(noAtual.valor) necessita balanceamento!")
             
             // Rotação Simples à Direita
@@ -108,12 +106,11 @@ class TelaPrincipalViewModel: ObservableObject {
                     } else {
                         exibirTextoInformativo("Executaria uma Rotação Simples à Direita no nó \(noAtual.valor).")
                     }
-                    
-                    return
                 } else if noAtual.esquerda!.fatorBalanceamento < 0 {
                     print("Rotação Dupla à Direita")
                     
                     if balancear {
+                        // TODO: Mover isso para dentro do método de rotação.
                         if noAtual.isRaiz {
                             self.raiz = noAtual.esquerda!.direita
                         }
@@ -122,8 +119,6 @@ class TelaPrincipalViewModel: ObservableObject {
                     } else {
                         exibirTextoInformativo("Executaria uma Rotação Dupla à Direita no nó \(noAtual.valor).")
                     }
-                    
-                    return
                 }
             }
             
@@ -140,8 +135,7 @@ class TelaPrincipalViewModel: ObservableObject {
                     print("Rotação Dupla à Esquerda")
                     
                     if balancear {
-                        // TODO: Implementar!
-                        rotacaoDuplaAEsquerda()
+                        rotacaoDuplaAEsquerda(noAtual, pai: noAtual.pai)
                         adicionarAoTextoInformativo("Rotação Dupla à Esquerda aplicada.")
                     } else {
                         exibirTextoInformativo("Executaria uma Rotação Dupla à Esquerda no nó \(noAtual.valor).")
@@ -155,7 +149,6 @@ class TelaPrincipalViewModel: ObservableObject {
                     } else {
                         exibirTextoInformativo("Executaria uma Rotação Simples à Esquerda no nó \(noAtual.valor).")
                     }
-                    return
                 }
             }
         }
@@ -256,7 +249,7 @@ class TelaPrincipalViewModel: ObservableObject {
         }
     }
     
-    func rotacaoDuplaAEsquerda() {
+    func rotacaoDuplaAEsquerda(_ k3: No, pai: No?) {
         
     }
     
@@ -323,6 +316,7 @@ class TelaPrincipalViewModel: ObservableObject {
                     noASerRemovido.pai?.direita = nil
                 }
             }
+            exibirTextoInformativo("💀  O número \(valor) foi removido.")
             
         // Caso 2: O nó a ser removido só tem 1 filho.
         } else if (noASerRemovido.esquerda == nil) || (noASerRemovido.direita == nil) {
@@ -345,6 +339,7 @@ class TelaPrincipalViewModel: ObservableObject {
                 }
                 filho!.pai = noASerRemovido.pai
             }
+            exibirTextoInformativo("💀  O número \(valor) foi removido.")
             
         // Caso 3: O nó a ser removido tem 2 filhos.
         } else if (noASerRemovido.esquerda != nil) && (noASerRemovido.direita != nil) {
@@ -365,6 +360,7 @@ class TelaPrincipalViewModel: ObservableObject {
                     noASerRemovido.pai?.direita = sucessorEmOrdem
                 }
             }
+            exibirTextoInformativo("💀  O número \(valor) foi removido.")
         }
         
         verificarBalanceamento(raiz, balancear: true)
@@ -487,6 +483,10 @@ class TelaPrincipalViewModel: ObservableObject {
     
     func adicionarAoTextoInformativo(_ texto: String) {
         self.status = self.status + " " + texto
+    }
+    
+    func limparTextoInformativo() {
+        self.status = ""
     }
     
     func limparArvore() {

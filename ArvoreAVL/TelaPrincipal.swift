@@ -88,6 +88,7 @@ struct TelaPrincipal: View {
                         // INSERÇÃO
                         Button(action: {
                             if entrada.isInt {
+                                viewModel.limparTextoInformativo()
                                 viewModel.inserir(Int(entrada)!)
                                 //print("Número adicionado à árvore.")
                                 entrada = ""
@@ -105,6 +106,7 @@ struct TelaPrincipal: View {
                         // BUSCA
                         Button(action: {
                             if entrada.isInt {
+                                viewModel.limparTextoInformativo()
                                 viewModel.buscar(valor: Int(self.entrada)!)
                                 //print("Número adicionado à árvore.")
                                 entrada = ""
@@ -123,6 +125,7 @@ struct TelaPrincipal: View {
                         // REMOÇÃO
                         Button(action: {
                             if entrada.isInt {
+                                viewModel.limparTextoInformativo()
                                 viewModel.remover(Int(self.entrada)!)
                                 //print("Número removido da árvore.")
                                 entrada = ""
