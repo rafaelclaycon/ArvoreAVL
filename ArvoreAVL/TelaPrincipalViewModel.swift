@@ -27,6 +27,7 @@ class TelaPrincipalViewModel: ObservableObject {
     func inserir(_ valor: Int) {
         if raiz == nil {
             raiz = No(pai: nil, esquerda: nil, direita: nil, valor: valor)
+            exibirTextoInformativo("O número \(valor) foi inserido.")
         } else {
             if valor < raiz!.valor {
                 if raiz?.esquerda == nil {
@@ -49,7 +50,7 @@ class TelaPrincipalViewModel: ObservableObject {
         
         print(" ")
         print("----------------")
-        verificaBalanceamento(raiz, executarBalanceamento: true)
+        verificarBalanceamento(raiz, balancear: true)
         print(" ")
         imprime(raiz)
         
@@ -77,11 +78,15 @@ class TelaPrincipalViewModel: ObservableObject {
     }
     
     // MARK: - Balanceamento
-    func verificaBalanceamento(_ no: No?, executarBalanceamento: Bool) {
+    func verificarBalanceamento(_ no: No?, balancear: Bool) {
         guard let noAtual = no else {
             return
         }
         
+        verificarBalanceamento(noAtual.esquerda, balancear: balancear)
+        verificarBalanceamento(noAtual.direita, balancear: balancear)
+        
+        print("Nó \(noAtual.valor) consultado para balanceamento. Fator: \(noAtual.fatorBalanceamento)")
         if (noAtual.fatorBalanceamento < -1) || (noAtual.fatorBalanceamento > 1) {
             //self.status = "Nó \(no!.valor) necessita balanceamento!"
             print("Nó \(noAtual.valor) necessita balanceamento!")
@@ -98,7 +103,7 @@ class TelaPrincipalViewModel: ObservableObject {
                 if noAtual.esquerda!.fatorBalanceamento > 0 {
                     print("Rotação Simples à Direita")
 
-                    if executarBalanceamento {
+                    if balancear {
                         rotacaoSimplesADireita(noAtual)
                         adicionarAoTextoInformativo("Rotação Simples à Direita aplicada.")
                     } else {
@@ -109,7 +114,7 @@ class TelaPrincipalViewModel: ObservableObject {
                 } else if noAtual.esquerda!.fatorBalanceamento < 0 {
                     print("Rotação Dupla à Direita")
                     
-                    if executarBalanceamento {
+                    if balancear {
                         if noAtual.isRaiz {
                             self.raiz = noAtual.esquerda!.direita
                         }
@@ -135,7 +140,7 @@ class TelaPrincipalViewModel: ObservableObject {
                 if noAtual.direita!.fatorBalanceamento > 0 {
                     print("Rotação Dupla à Esquerda")
                     
-                    if executarBalanceamento {
+                    if balancear {
                         // TODO: Implementar!
                         rotacaoDuplaAEsquerda()
                         adicionarAoTextoInformativo("Rotação Dupla à Esquerda aplicada.")
@@ -145,7 +150,7 @@ class TelaPrincipalViewModel: ObservableObject {
                 } else if noAtual.direita!.fatorBalanceamento < 0 {
                     print("Rotação Simples à Esquerda")
                     
-                    if executarBalanceamento {
+                    if balancear {
                         rotacaoSimplesAEsquerda(noAtual)
                         adicionarAoTextoInformativo("Rotação Simples à Esquerda aplicada.")
                     } else {
@@ -155,9 +160,6 @@ class TelaPrincipalViewModel: ObservableObject {
                 }
             }
         }
-        
-        verificaBalanceamento(noAtual.direita, executarBalanceamento: executarBalanceamento)
-        verificaBalanceamento(noAtual.esquerda, executarBalanceamento: executarBalanceamento)
     }
     
     func rotacaoSimplesAEsquerda(_ a: No) {
@@ -366,7 +368,7 @@ class TelaPrincipalViewModel: ObservableObject {
             }
         }
         
-        verificaBalanceamento(noASerRemovido.pai, executarBalanceamento: true)
+        verificarBalanceamento(raiz, balancear: true)
         
         self.mostarArvore = false
     }
