@@ -103,13 +103,14 @@ class TelaPrincipalViewModel: ObservableObject {
                     adicionarAoTextoInformativo("Rotação Simples à Direita aplicada.")
                     return
                 } else if noAtual.esquerda!.fatorBalanceamento < 0 {
-                    exibirTextoInformativo("Rotação Dupla à Direita aplicada.")
-                    
                     print("Rotação Dupla à Direita")
+                    
                     if noAtual.isRaiz {
                         self.raiz = noAtual.esquerda!.direita
                     }
                     rotacaoDuplaADireita(noAtual, pai: noAtual.pai)
+                    
+                    adicionarAoTextoInformativo("Rotação Dupla à Direita aplicada.")
                     return
                 }
             }
@@ -124,17 +125,18 @@ class TelaPrincipalViewModel: ObservableObject {
             
             if noAtual.fatorBalanceamento < -1 {
                 if noAtual.direita!.fatorBalanceamento > 0 {
-                    exibirTextoInformativo("Rotação Dupla à Esquerda aplicada.")
                     print("Rotação Dupla à Esquerda")
                     
-                } else if noAtual.direita!.fatorBalanceamento < 0 {
-                    exibirTextoInformativo("Rotação Simples à Esquerda aplicada.")
+                    // TODO: Implementar!
+                    rotacaoDuplaAEsquerda()
                     
+                    adicionarAoTextoInformativo("Rotação Dupla à Esquerda aplicada.")
+                } else if noAtual.direita!.fatorBalanceamento < 0 {
                     print("Rotação Simples à Esquerda")
-                    if noAtual.isRaiz {
-                        self.raiz = noAtual.direita
-                    }
+                    
                     rotacaoSimplesAEsquerda(noAtual)
+                    
+                    adicionarAoTextoInformativo("Rotação Simples à Esquerda aplicada.")
                     return
                 }
             }
@@ -148,9 +150,20 @@ class TelaPrincipalViewModel: ObservableObject {
         // b - com certeza existe
         let b = a.direita!
         // c
-        //let c = b.direita
+        let c = b.direita
         // d
         let d = b.esquerda
+        
+        imprimeVariavelAuxiliar(a, "a")
+        imprimeVariavelAuxiliar(b, "b")
+        imprimeVariavelAuxiliar(c, "c")
+        imprimeVariavelAuxiliar(d, "d")
+        
+        if a.isRaiz {
+            self.raiz = b
+        } else {
+            a.pai!.direita = b
+        }
         
         b.pai = a.pai
         a.pai = b
@@ -466,6 +479,7 @@ class TelaPrincipalViewModel: ObservableObject {
         if raiz != nil {
             raiz = nil
         }
+        self.status = ""
     }
     
     func inserirExemploExclusao() {
@@ -513,5 +527,47 @@ class TelaPrincipalViewModel: ObservableObject {
             return print(nome + ": -")
         }
         print(nome + ": \(variavel.valor)")
+    }
+    
+    func inserirExemploRotacaoSimplesAEsquerda() {
+        self.inserir(120)
+        self.inserir(100)
+        self.inserir(130)
+        self.inserir(80)
+        self.inserir(110)
+        self.inserir(150)
+        self.mostarArvore = false
+        self.mostarArvore = true
+    }
+    
+    func inserirSegundoExemploRotacaoSimplesAEsquerda() {
+        self.inserir(42)
+        self.inserir(15)
+        self.inserir(88)
+        self.inserir(67)
+        self.inserir(94)
+        self.mostarArvore = false
+        self.mostarArvore = true
+    }
+    
+    func inserirExemploRotacaoDuplaADireita() {
+        self.inserir(120)
+        self.inserir(110)
+        self.inserir(150)
+        self.inserir(80)
+        self.inserir(130)
+        self.inserir(200)
+        self.mostarArvore = false
+        self.mostarArvore = true
+    }
+    
+    func inserirSegundoExemploRotacaoDuplaADireita() {
+        self.inserir(42)
+        self.inserir(15)
+        self.inserir(88)
+        self.inserir(6)
+        self.inserir(27)
+        self.mostarArvore = false
+        self.mostarArvore = true
     }
 }

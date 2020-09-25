@@ -45,16 +45,20 @@ struct TelaPrincipal: View {
                             viewModel.exibindoFerramentas = true
                         }) {
                             HStack {
-                                Text("Exemplos")
+                                Text("Casos de teste")
                             }
                         }
                         .disabled(!viewModel.arvoreVazia)
                         .actionSheet(isPresented: $viewModel.exibindoFerramentas) {
-                            ActionSheet(title: Text("Auxílio ao desenvolvimento"),
+                            ActionSheet(title: Text("Cria árvores vistas nos PDFs de aula."),
                                         message: nil,
-                                        buttons: [.default(Text("Rot Simples à Direita - PDF AVL pg 12")) { viewModel.inserirExemploRotacaoSimplesADireita() },
-                                                  .default(Text("Rot Simples à Direita - PDF AVL pg 14")) { viewModel.inserirSegundoExemploRotacaoSimplesADireita() },
-                                                  .default(Text("Exclusão - PDF AVL pg 30")) { viewModel.inserirExemploExclusao() },
+                                        buttons: [.default(Text("+ Rot Simples à Direita - AVL pg 12")) { viewModel.inserirExemploRotacaoSimplesADireita() },
+                                                  .default(Text("+ Rot Simples à Direita - AVL pg 14")) { viewModel.inserirSegundoExemploRotacaoSimplesADireita() },
+                                                  .default(Text("+ Rot Simples à Esquerda - AVL pg 16")) { viewModel.inserirExemploRotacaoSimplesAEsquerda() },
+                                                  .default(Text("+ Rot Simples à Esquerda - AVL pg 17")) { viewModel.inserirSegundoExemploRotacaoSimplesAEsquerda() },
+                                                  .default(Text("+ Rot Dupla à Direita - AVL pg 19")) { viewModel.inserirExemploRotacaoDuplaADireita() },
+                                                  .default(Text("+ Rot Dupla à Direita - AVL pg 22")) { viewModel.inserirSegundoExemploRotacaoDuplaADireita() },
+                                                  .default(Text("Exclusão - AVL pg 30")) { viewModel.inserirExemploExclusao() },
                                                   .cancel(Text("Cancelar"))])
                         }
                     }
