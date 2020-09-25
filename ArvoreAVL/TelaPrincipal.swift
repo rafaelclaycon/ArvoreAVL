@@ -185,10 +185,9 @@ struct TelaPrincipal: View {
                     .padding()
                 }
             }
-            if viewModel.mostarTextoInformativo {
-                Text(viewModel.status)
-                    .offset(y: 270)
-            }
+            
+            Text(viewModel.status)
+                .offset(y: 270)
         }
     }
 }

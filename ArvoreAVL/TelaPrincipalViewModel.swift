@@ -13,7 +13,6 @@ class TelaPrincipalViewModel: ObservableObject {
     @Published var imagemPerfil: Image = ImageStore.shared.image(name: "imagem_perfil")
     @Published var mostarArvore: Bool = true
     @Published var status: String = ""
-    @Published var mostarTextoInformativo: Bool = false
     @Published var exibindoOpcoesCaminhamento = false
     @Published var exibindoFerramentas = false
     
@@ -484,14 +483,6 @@ class TelaPrincipalViewModel: ObservableObject {
     
     func exibirTextoInformativo(_ texto: String) {
         self.status = texto
-        
-        self.mostarTextoInformativo = true
-        
-//        _ = Timer.scheduledTimer(withTimeInterval: 15.0, repeats: false) { timer in
-//            DispatchQueue.main.async {
-//                self.mostarTextoInformativo = false
-//            }
-//        }
     }
     
     func adicionarAoTextoInformativo(_ texto: String) {
