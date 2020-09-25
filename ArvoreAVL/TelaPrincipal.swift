@@ -53,6 +53,7 @@ struct TelaPrincipal: View {
                             ActionSheet(title: Text("Auxílio ao desenvolvimento"),
                                         message: nil,
                                         buttons: [.default(Text("Rot Simples à Direita - PDF AVL pg 12")) { viewModel.inserirExemploRotacaoSimplesADireita() },
+                                                  .default(Text("Rot Simples à Direita - PDF AVL pg 14")) { viewModel.inserirSegundoExemploRotacaoSimplesADireita() },
                                                   .default(Text("Exclusão - PDF AVL pg 30")) { viewModel.inserirExemploExclusao() },
                                                   .cancel(Text("Cancelar"))])
                         }
@@ -64,7 +65,6 @@ struct TelaPrincipal: View {
                 
                 if viewModel.mostarArvore {
                     DiagramaSubarvore(no: viewModel.raiz)
-                        //.border(Color.red)
                 }
                 
                 Spacer()

@@ -31,12 +31,14 @@ class TelaPrincipalViewModel: ObservableObject {
             if valor < raiz!.valor {
                 if raiz?.esquerda == nil {
                     raiz?.esquerda = No(pai: raiz, esquerda: nil, direita: nil, valor: valor)
+                    exibirTextoInformativo("O número \(valor) foi inserido.")
                 } else {
                     inserirEmSubarvore((raiz?.esquerda)!, valor)
                 }
             } else if valor > raiz!.valor {
                 if raiz?.direita == nil {
                     raiz?.direita = No(pai: raiz, esquerda: nil, direita: nil, valor: valor)
+                    exibirTextoInformativo("O número \(valor) foi inserido.")
                 } else {
                     inserirEmSubarvore((raiz?.direita)!, valor)
                 }
@@ -50,18 +52,22 @@ class TelaPrincipalViewModel: ObservableObject {
         verificaBalanceamento(raiz)
         print(" ")
         imprime(raiz)
+        
+        self.mostarArvore = false
     }
     
     func inserirEmSubarvore(_ raiz: No, _ valor: Int) {
         if valor < raiz.valor {
             if raiz.esquerda == nil {
                 raiz.esquerda = No(pai: raiz, esquerda: nil, direita: nil, valor: valor)
+                exibirTextoInformativo("O número \(valor) foi inserido.")
             } else {
                 inserirEmSubarvore((raiz.esquerda)!, valor)
             }
         } else if valor > raiz.valor {
             if raiz.direita == nil {
                 raiz.direita = No(pai: raiz, esquerda: nil, direita: nil, valor: valor)
+                exibirTextoInformativo("O número \(valor) foi inserido.")
             } else {
                 inserirEmSubarvore((raiz.direita)!, valor)
             }
@@ -72,13 +78,13 @@ class TelaPrincipalViewModel: ObservableObject {
     
     // MARK: - Balanceamento
     func verificaBalanceamento(_ no: No?) {
-        if no == nil {
+        guard let noAtual = no else {
             return
         }
         
-        if (no!.fatorBalanceamento < -1) || (no!.fatorBalanceamento > 1) {
+        if (noAtual.fatorBalanceamento < -1) || (noAtual.fatorBalanceamento > 1) {
             //self.status = "Nó \(no!.valor) necessita balanceamento!"
-            print("Nó \(no!.valor) necessita balanceamento!")
+            print("Nó \(noAtual.valor) necessita balanceamento!")
             
             // Rotação Simples à Direita
             // Toda vez que uma sub-árvore fica com um fator
@@ -88,24 +94,22 @@ class TelaPrincipalViewModel: ObservableObject {
             // Toda vez que uma sub-árvore fica com um fator
             // POSITIVO e sua sub-árvore da esquerda também tem um fator NEGATIVO
             
-            if no!.fatorBalanceamento > 1 {
-                if no!.esquerda!.fatorBalanceamento > 0 {
-                    exibirTextoInformativo("Rotação Simples à Direita aplicada.")
-                    
+            if noAtual.fatorBalanceamento > 1 {
+                if noAtual.esquerda!.fatorBalanceamento > 0 {
                     print("Rotação Simples à Direita")
-                    if no!.isRaiz {
-                        self.raiz = no!.esquerda
-                    }
-                    rotacaoSimplesADireita(no!)
+
+                    rotacaoSimplesADireita(noAtual)
+                    
+                    adicionarAoTextoInformativo("Rotação Simples à Direita aplicada.")
                     return
-                } else if no!.esquerda!.fatorBalanceamento < 0 {
+                } else if noAtual.esquerda!.fatorBalanceamento < 0 {
                     exibirTextoInformativo("Rotação Dupla à Direita aplicada.")
                     
                     print("Rotação Dupla à Direita")
-                    if no!.isRaiz {
-                        self.raiz = no!.esquerda!.direita
+                    if noAtual.isRaiz {
+                        self.raiz = noAtual.esquerda!.direita
                     }
-                    rotacaoDuplaADireita(no!, pai: no!.pai)
+                    rotacaoDuplaADireita(noAtual, pai: noAtual.pai)
                     return
                 }
             }
@@ -118,26 +122,26 @@ class TelaPrincipalViewModel: ObservableObject {
             // Toda vez que uma sub-árvore fica com um fator
             // NEGATIVO e sua sub-árvore da direita também tem um fator POSITIVO
             
-            if no!.fatorBalanceamento < -1 {
-                if no!.direita!.fatorBalanceamento > 0 {
+            if noAtual.fatorBalanceamento < -1 {
+                if noAtual.direita!.fatorBalanceamento > 0 {
                     exibirTextoInformativo("Rotação Dupla à Esquerda aplicada.")
                     print("Rotação Dupla à Esquerda")
                     
-                } else if no!.direita!.fatorBalanceamento < 0 {
+                } else if noAtual.direita!.fatorBalanceamento < 0 {
                     exibirTextoInformativo("Rotação Simples à Esquerda aplicada.")
                     
                     print("Rotação Simples à Esquerda")
-                    if no!.isRaiz {
-                        self.raiz = no!.direita
+                    if noAtual.isRaiz {
+                        self.raiz = noAtual.direita
                     }
-                    rotacaoSimplesAEsquerda(no!)
+                    rotacaoSimplesAEsquerda(noAtual)
                     return
                 }
             }
         }
         
-        verificaBalanceamento(no!.direita)
-        verificaBalanceamento(no!.esquerda)
+        verificaBalanceamento(noAtual.direita)
+        verificaBalanceamento(noAtual.esquerda)
     }
     
     func rotacaoSimplesAEsquerda(_ a: No) {
@@ -159,16 +163,28 @@ class TelaPrincipalViewModel: ObservableObject {
         // k1 - com certeza existe
         let k1 = k2.esquerda!
         // x
-        //let x = k1.esquerda
+        let x = k1.esquerda
         // y
         let y = k1.direita
         // z
         let z = k2.direita
         
+        imprimeVariavelAuxiliar(k2, "k2")
+        imprimeVariavelAuxiliar(k1, "k1")
+        imprimeVariavelAuxiliar(x, "x")
+        imprimeVariavelAuxiliar(y, "y")
+        imprimeVariavelAuxiliar(z, "z")
+        
+        if k2.isRaiz {
+            self.raiz = k1
+        } else {
+            k2.pai!.esquerda = k1
+        }
+        
         k1.pai = k2.pai
         k2.pai = k1
         
-        //k1.esquerda = x
+        k1.esquerda = x
         k1.direita = k2
         
         k2.esquerda = y
@@ -442,6 +458,10 @@ class TelaPrincipalViewModel: ObservableObject {
 //        }
     }
     
+    func adicionarAoTextoInformativo(_ texto: String) {
+        self.status = self.status + " " + texto
+    }
+    
     func limparArvore() {
         if raiz != nil {
             raiz = nil
@@ -476,5 +496,22 @@ class TelaPrincipalViewModel: ObservableObject {
         self.inserir(200)
         self.mostarArvore = false
         self.mostarArvore = true
+    }
+    
+    func inserirSegundoExemploRotacaoSimplesADireita() {
+        self.inserir(42)
+        self.inserir(15)
+        self.inserir(88)
+        self.inserir(6)
+        self.inserir(27)
+        self.mostarArvore = false
+        self.mostarArvore = true
+    }
+    
+    func imprimeVariavelAuxiliar(_ variavel: No?, _ nome: String) {
+        guard let variavel = variavel else {
+            return print(nome + ": -")
+        }
+        print(nome + ": \(variavel.valor)")
     }
 }
