@@ -207,6 +207,10 @@ class TelaPrincipalViewModel: ObservableObject {
         }
     }
     
+    func rotacaoDuplaAEsquerda() {
+        
+    }
+    
     // MARK: - Busca
     func buscar(valor: Int) {
         if raiz == nil {
@@ -459,6 +463,17 @@ class TelaPrincipalViewModel: ObservableObject {
         self.inserir(60)
         self.inserir(58)
         self.inserir(62)
+        self.mostarArvore = false
+        self.mostarArvore = true
+    }
+    
+    func inserirExemploRotacaoSimplesADireita() {
+        self.inserir(120)
+        self.inserir(110)
+        self.inserir(150)
+        self.inserir(100)
+        self.inserir(130)
+        self.inserir(200)
         self.mostarArvore = false
         self.mostarArvore = true
     }

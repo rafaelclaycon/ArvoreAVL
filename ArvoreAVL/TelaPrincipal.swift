@@ -45,14 +45,15 @@ struct TelaPrincipal: View {
                             viewModel.exibindoFerramentas = true
                         }) {
                             HStack {
-                                Text("Ferramentas")
+                                Text("Exemplos")
                             }
                         }
                         .disabled(!viewModel.arvoreVazia)
                         .actionSheet(isPresented: $viewModel.exibindoFerramentas) {
-                            ActionSheet(title: Text("Ferramentas de auxilio ao desenvolvimento"),
+                            ActionSheet(title: Text("Auxílio ao desenvolvimento"),
                                         message: nil,
-                                        buttons: [.default(Text("Inserir exemplo exclusão")) { viewModel.inserirExemploExclusao() },
+                                        buttons: [.default(Text("Rot Simples à Direita - PDF AVL pg 12")) { viewModel.inserirExemploRotacaoSimplesADireita() },
+                                                  .default(Text("Exclusão - PDF AVL pg 30")) { viewModel.inserirExemploExclusao() },
                                                   .cancel(Text("Cancelar"))])
                         }
                     }
