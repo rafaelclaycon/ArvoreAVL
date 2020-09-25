@@ -152,8 +152,8 @@ struct TelaPrincipal: View {
                             ActionSheet(title: Text("Escolha um tipo de caminhamento:"),
                                         message: nil,
                                         buttons: [.default(Text("↩️  Pré-Ordem")) { viewModel.exibirCaminhamentoPreOrdem() },
+                                                  .default(Text("🔢  Em Ordem")) { viewModel.exibirCaminhamentoEmOrdem() },
                                                   .default(Text("↪️  Pós-Ordem")) { viewModel.exibirCaminhamentoPosOrdem() },
-                                                  .default(Text("🔢  Em-Ordem")) { viewModel.exibirCaminhamentoEmOrdem() },
                                                   .cancel(Text("Cancelar"))])
                         }
                         
