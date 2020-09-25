@@ -59,7 +59,10 @@ struct TelaPrincipal: View {
                                                   .default(Text("+ Rot Dupla à Direita - AVL pg 19")) { viewModel.inserirExemploRotacaoDuplaADireita() },
                                                   .default(Text("+ Rot Dupla à Direita - AVL pg 22")) { viewModel.inserirSegundoExemploRotacaoDuplaADireita() },
                                                   .default(Text("+ Rot Dupla à Esquerda - AVL pg 25")) { viewModel.inserirExemploRotacaoDuplaAEsquerda() },
+                                                  .default(Text("+ Rot Dupla à Esquerda - GeeksforGeeks")) { viewModel.inserirExemploRotacaoDuplaAEsquerdaG4G() },
                                                   .default(Text("Exclusão - AVL pg 30")) { viewModel.inserirExemploExclusao() },
+                                                  .default(Text("Exclusão - GeeksforGeeks")) { viewModel.inserirExemploExclusaoG4G() },
+                                                  .default(Text("Caminho - PDF Arv Binárias")) { viewModel.inserirExemploCaminhoArvBinarias() },
                                                   .cancel(Text("Cancelar"))])
                         }
                     }
@@ -166,7 +169,7 @@ struct TelaPrincipal: View {
                         }
                         
                         Toggle(isOn: $viewModel.mostarArvore) {
-                            Text("Mostar árvore")
+                            Text("Mostrar árvore")
                         }
                         .frame(width: 170)
                         .padding(.leading, 10)

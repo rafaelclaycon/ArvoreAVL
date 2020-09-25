@@ -635,4 +635,45 @@ class TelaPrincipalViewModel: ObservableObject {
         self.mostarArvore = false
         self.mostarArvore = true
     }
+    
+    func inserirExemploExclusaoG4G() {
+        self.inserir(50)
+        self.inserir(30)
+        self.inserir(70)
+        self.inserir(20)
+        self.inserir(40)
+        self.inserir(60)
+        self.inserir(80)
+        exibirTextoInformativo("Remova os números 20, 30 e 50.")
+        self.mostarArvore = false
+        self.mostarArvore = true
+    }
+    
+    func inserirExemploCaminhoArvBinarias() {
+        self.inserir(4)
+        self.inserir(2)
+        self.inserir(6)
+        self.inserir(1)
+        self.inserir(3)
+        self.inserir(5)
+        self.inserir(7)
+        exibirTextoInformativo("Mostre os caminhamentos.")
+        self.mostarArvore = false
+        self.mostarArvore = true
+    }
+    
+    func inserirExemploRotacaoDuplaAEsquerdaG4G() {
+        self.inserir(5)
+        self.inserir(2)
+        self.inserir(7)
+        self.inserir(1)
+        self.inserir(4)
+        self.inserir(6)
+        self.inserir(9)
+        self.inserir(3)
+        self.inserir(16)
+        exibirTextoInformativo("Insira o número 15.")
+        self.mostarArvore = false
+        self.mostarArvore = true
+    }
 }
