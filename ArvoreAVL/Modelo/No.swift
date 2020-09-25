@@ -18,6 +18,17 @@ class No {
     var isRaiz: Bool {
         return pai == nil
     }
+    var orientacaoEmRelacaoAoPai: OrientacaoNo {
+        if pai == nil {
+            return .nenhuma
+        } else {
+            if pai?.esquerda?.valor == self.valor {
+                return .esquerda
+            } else {
+                return .direita
+            }
+        }
+    }
     
     init(pai: No?, esquerda: No?, direita: No?, valor: Int) {
         self.pai = pai
@@ -40,4 +51,8 @@ class No {
             }
         }
     }
+}
+
+enum OrientacaoNo {
+    case nenhuma, esquerda, direita
 }

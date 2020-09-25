@@ -30,14 +30,31 @@ struct TelaPrincipal: View {
                     
                     Spacer()
                     
-                    HStack {
-                        Text("Rafael Claycon Schmitt")
-                            .font(.title3)
-                            .padding(.trailing, 8)
+                    VStack(alignment: .trailing) {
+                        HStack {
+                            Text("Rafael Claycon Schmitt")
+                                .font(.title3)
+                                .padding(.trailing, 8)
+                            
+                            viewModel.imagemPerfil
+                                .resizable()
+                                .frame(width: 40, height: 40, alignment: .center)
+                        }
                         
-                        viewModel.imagemPerfil
-                            .resizable()
-                            .frame(width: 40, height: 40, alignment: .center)
+                        Button(action: {
+                            viewModel.exibindoFerramentas = true
+                        }) {
+                            HStack {
+                                Text("Ferramentas")
+                            }
+                        }
+                        .disabled(!viewModel.arvoreVazia)
+                        .actionSheet(isPresented: $viewModel.exibindoFerramentas) {
+                            ActionSheet(title: Text("Ferramentas de auxilio ao desenvolvimento"),
+                                        message: nil,
+                                        buttons: [.default(Text("Inserir exemplo exclusão")) { viewModel.inserirExemploExclusao() },
+                                                  .cancel(Text("Cancelar"))])
+                        }
                     }
                     .padding(.trailing, 20)
                 }
@@ -101,7 +118,7 @@ struct TelaPrincipal: View {
                         // REMOÇÃO
                         Button(action: {
                             if entrada.isInt {
-                                //viewModel.remover(valor: Int(self.entrada)!)
+                                viewModel.remover(Int(self.entrada)!)
                                 //print("Número removido da árvore.")
                                 entrada = ""
                             }
@@ -144,6 +161,19 @@ struct TelaPrincipal: View {
                         }
                         .frame(width: 170)
                         .padding(.leading, 10)
+                        
+                        // LIMPAR ÁRVORE
+                        Button(action: {
+                            viewModel.limparArvore()
+                        }) {
+                            HStack {
+                                Image(systemName: "tornado")
+                            }
+                        }
+                        .buttonStyle(EstiloBordaComContorno())
+                        .foregroundColor(.red)
+                        .padding(.leading, 30)
+                        .disabled(viewModel.arvoreVazia)
                         
                         Spacer()
                     }

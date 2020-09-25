@@ -15,6 +15,7 @@ class TelaPrincipalViewModel: ObservableObject {
     @Published var status: String = ""
     @Published var mostarTextoInformativo: Bool = false
     @Published var exibindoOpcoesCaminhamento = false
+    @Published var exibindoFerramentas = false
     
     var arvoreVazia: Bool {
         return raiz == nil
@@ -251,6 +252,92 @@ class TelaPrincipalViewModel: ObservableObject {
         return true
     }
     
+    // MARK: - Remoção
+    func remover(_ valor: Int) {
+        guard let noASerRemovido = getNo(comValor: valor, aPartirDe: raiz) else {
+            return exibirTextoInformativo("⛔️  Não é possível remover o número \(valor) pois ele não está na árvore.")
+        }
+        
+        // Caso 1: O nó a ser removido é um nó folha.
+        if (noASerRemovido.esquerda == nil) && (noASerRemovido.direita == nil) {
+            if noASerRemovido.valor == raiz?.valor {
+                raiz = nil
+            } else {
+                switch noASerRemovido.orientacaoEmRelacaoAoPai {
+                case .esquerda:
+                    noASerRemovido.pai?.esquerda = nil
+                default:
+                    noASerRemovido.pai?.direita = nil
+                }
+            }
+            
+        // Caso 2: O nó a ser removido só tem 1 filho.
+        } else if (noASerRemovido.esquerda == nil) || (noASerRemovido.direita == nil) {
+            var filho: No? = nil
+            if noASerRemovido.esquerda != nil {
+                filho = noASerRemovido.esquerda!
+            } else if noASerRemovido.direita != nil {
+                filho = noASerRemovido.direita!
+            }
+            
+            if noASerRemovido.valor == raiz?.valor {
+                raiz = filho
+                filho!.pai = nil
+            } else {
+                switch noASerRemovido.orientacaoEmRelacaoAoPai {
+                case .esquerda:
+                    noASerRemovido.pai?.esquerda = filho
+                default:
+                    noASerRemovido.pai?.direita = filho
+                }
+                filho!.pai = noASerRemovido.pai
+            }
+            
+        // Caso 3: O nó a ser removido tem 2 filhos.
+        } else if (noASerRemovido.esquerda != nil) && (noASerRemovido.direita != nil) {
+            let sucessorEmOrdem = getMenorADireita(noASerRemovido.direita!)
+            remover(sucessorEmOrdem.valor)
+            
+            sucessorEmOrdem.pai = noASerRemovido.pai
+            sucessorEmOrdem.esquerda = noASerRemovido.esquerda
+            sucessorEmOrdem.direita = noASerRemovido.direita
+            
+            if noASerRemovido.valor == raiz?.valor {
+                raiz = sucessorEmOrdem
+            } else {
+                switch noASerRemovido.orientacaoEmRelacaoAoPai {
+                case .esquerda:
+                    noASerRemovido.pai?.esquerda = sucessorEmOrdem
+                default:
+                    noASerRemovido.pai?.direita = sucessorEmOrdem
+                }
+            }
+        }
+        
+        verificaBalanceamento(noASerRemovido.pai)
+    }
+    
+    func getNo(comValor valor: Int, aPartirDe no: No?) -> No? {
+        guard let no = no else {
+            return nil
+        }
+                
+        if valor < no.valor {
+            return getNo(comValor: valor, aPartirDe: no.esquerda)
+        } else if valor > no.valor {
+            return getNo(comValor: valor, aPartirDe: no.direita)
+        }
+        return no
+    }
+    
+    func getMenorADireita(_ no: No) -> No {
+        var atual = no
+        while (atual.esquerda != nil) {
+            atual = atual.esquerda!
+        }
+        return atual
+    }
+    
     // MARK: - Caminhamento
     
     func exibirCaminhamentoPreOrdem() {
@@ -349,5 +436,30 @@ class TelaPrincipalViewModel: ObservableObject {
 //                self.mostarTextoInformativo = false
 //            }
 //        }
+    }
+    
+    func limparArvore() {
+        if raiz != nil {
+            raiz = nil
+        }
+    }
+    
+    func inserirExemploExclusao() {
+        self.inserir(32)
+        self.inserir(16)
+        self.inserir(48)
+        self.inserir(8)
+        self.inserir(24)
+        self.inserir(40)
+        self.inserir(56)
+        self.inserir(28)
+        self.inserir(36)
+        self.inserir(44)
+        self.inserir(52)
+        self.inserir(60)
+        self.inserir(58)
+        self.inserir(62)
+        self.mostarArvore = false
+        self.mostarArvore = true
     }
 }
