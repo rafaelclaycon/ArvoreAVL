@@ -52,7 +52,7 @@ class TelaPrincipalViewModel: ObservableObject {
         print("----------------")
         verificarBalanceamento(raiz, balancear: true)
         print(" ")
-        imprime(raiz)
+        imprimir(raiz)
         
         self.mostarArvore = false
     }
@@ -170,10 +170,10 @@ class TelaPrincipalViewModel: ObservableObject {
         // d
         let d = b.esquerda
         
-        imprimeVariavelAuxiliar(a, "a")
-        imprimeVariavelAuxiliar(b, "b")
-        imprimeVariavelAuxiliar(c, "c")
-        imprimeVariavelAuxiliar(d, "d")
+        imprimirVariavelAuxiliar(a, "a")
+        imprimirVariavelAuxiliar(b, "b")
+        imprimirVariavelAuxiliar(c, "c")
+        imprimirVariavelAuxiliar(d, "d")
         
         if a.isRaiz {
             self.raiz = b
@@ -203,11 +203,11 @@ class TelaPrincipalViewModel: ObservableObject {
         // z
         let z = k2.direita
         
-        imprimeVariavelAuxiliar(k2, "k2")
-        imprimeVariavelAuxiliar(k1, "k1")
-        imprimeVariavelAuxiliar(x, "x")
-        imprimeVariavelAuxiliar(y, "y")
-        imprimeVariavelAuxiliar(z, "z")
+        imprimirVariavelAuxiliar(k2, "k2")
+        imprimirVariavelAuxiliar(k1, "k1")
+        imprimirVariavelAuxiliar(x, "x")
+        imprimirVariavelAuxiliar(y, "y")
+        imprimirVariavelAuxiliar(z, "z")
         
         if k2.isRaiz {
             self.raiz = k1
@@ -457,7 +457,7 @@ class TelaPrincipalViewModel: ObservableObject {
     }
     
     // MARK: - Funções auxiliares
-    func imprime(_ no: No?) {
+    func imprimir(_ no: No?) {
         if no == nil {
             return
         }
@@ -478,8 +478,8 @@ class TelaPrincipalViewModel: ObservableObject {
         }
         
         print("(\(no!.valor)) - ^: \(valorPai), E: \(valorEsquerda), D: \(valorDireita), F: \(no!.fatorBalanceamento)")
-        imprime(no!.direita)
-        imprime(no!.esquerda)
+        imprimir(no!.direita)
+        imprimir(no!.esquerda)
     }
     
     func exibirTextoInformativo(_ texto: String) {
@@ -545,7 +545,7 @@ class TelaPrincipalViewModel: ObservableObject {
         self.mostarArvore = true
     }
     
-    func imprimeVariavelAuxiliar(_ variavel: No?, _ nome: String) {
+    func imprimirVariavelAuxiliar(_ variavel: No?, _ nome: String) {
         guard let variavel = variavel else {
             return print(nome + ": -")
         }
