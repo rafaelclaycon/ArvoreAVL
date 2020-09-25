@@ -58,6 +58,7 @@ struct TelaPrincipal: View {
                                                   .default(Text("+ Rot Simples à Esquerda - AVL pg 17")) { viewModel.inserirSegundoExemploRotacaoSimplesAEsquerda() },
                                                   .default(Text("+ Rot Dupla à Direita - AVL pg 19")) { viewModel.inserirExemploRotacaoDuplaADireita() },
                                                   .default(Text("+ Rot Dupla à Direita - AVL pg 22")) { viewModel.inserirSegundoExemploRotacaoDuplaADireita() },
+                                                  .default(Text("+ Rot Dupla à Esquerda - AVL pg 25")) { viewModel.inserirExemploRotacaoDuplaAEsquerda() },
                                                   .default(Text("Exclusão - AVL pg 30")) { viewModel.inserirExemploExclusao() },
                                                   .cancel(Text("Cancelar"))])
                         }

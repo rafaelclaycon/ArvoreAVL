@@ -249,8 +249,48 @@ class TelaPrincipalViewModel: ObservableObject {
         }
     }
     
-    func rotacaoDuplaAEsquerda(_ k3: No, pai: No?) {
+    func rotacaoDuplaAEsquerda(_ k1: No, pai: No?) {
+        let k3 = k1.direita!
+        let k2 = k3.esquerda!
+        let a = k1.esquerda
+        let b = k2.esquerda
+        let c = k2.direita
+        let d = k3.direita
         
+        imprimirVariavelAuxiliar(k1, "k1")
+        imprimirVariavelAuxiliar(k2, "k2")
+        imprimirVariavelAuxiliar(k3, "k3")
+        imprimirVariavelAuxiliar(a, "a")
+        imprimirVariavelAuxiliar(b, "b")
+        imprimirVariavelAuxiliar(c, "c")
+        imprimirVariavelAuxiliar(d, "d")
+        
+        // Rotação direita
+        k1.direita = k2
+        k2.pai = k1
+        
+        k2.direita = k3
+        k3.pai = k2
+        
+        k3.esquerda = c
+        c?.pai = k3
+        
+        // Rotação esquerda
+        switch k1.orientacaoEmRelacaoAoPai {
+        case .esquerda:
+            k1.pai?.esquerda = k2
+        case .direita:
+            k1.pai?.direita = k2
+        case .nenhuma:
+            self.raiz = k2
+        }
+        k2.pai = k1.pai
+        
+        k2.esquerda = k1
+        k1.pai = k2
+        
+        k1.direita = b
+        b?.pai = k1
     }
     
     // MARK: - Busca
@@ -581,6 +621,17 @@ class TelaPrincipalViewModel: ObservableObject {
         self.inserir(88)
         self.inserir(6)
         self.inserir(27)
+        self.mostarArvore = false
+        self.mostarArvore = true
+    }
+    
+    func inserirExemploRotacaoDuplaAEsquerda() {
+        self.inserir(120)
+        self.inserir(100)
+        self.inserir(130)
+        self.inserir(80)
+        self.inserir(110)
+        self.inserir(200)
         self.mostarArvore = false
         self.mostarArvore = true
     }
