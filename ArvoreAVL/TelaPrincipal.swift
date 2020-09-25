@@ -171,8 +171,8 @@ struct TelaPrincipal: View {
                         Toggle(isOn: $viewModel.mostarArvore) {
                             Text("Mostrar árvore")
                         }
-                        .frame(width: 170)
-                        .padding(.leading, 10)
+                        .frame(width: 180)
+                        .padding(.leading, 5)
                         
                         // LIMPAR ÁRVORE
                         Button(action: {

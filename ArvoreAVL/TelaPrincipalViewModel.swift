@@ -110,11 +110,7 @@ class TelaPrincipalViewModel: ObservableObject {
                     print("Rotação Dupla à Direita")
                     
                     if balancear {
-                        // TODO: Mover isso para dentro do método de rotação.
-                        if noAtual.isRaiz {
-                            self.raiz = noAtual.esquerda!.direita
-                        }
-                        rotacaoDuplaADireita(noAtual, pai: noAtual.pai)
+                        rotacaoDuplaADireita(noAtual)
                         adicionarAoTextoInformativo("Rotação Dupla à Direita aplicada.")
                     } else {
                         exibirTextoInformativo("Executaria uma Rotação Dupla à Direita no nó \(noAtual.valor).")
@@ -135,7 +131,7 @@ class TelaPrincipalViewModel: ObservableObject {
                     print("Rotação Dupla à Esquerda")
                     
                     if balancear {
-                        rotacaoDuplaAEsquerda(noAtual, pai: noAtual.pai)
+                        rotacaoDuplaAEsquerda(noAtual)
                         adicionarAoTextoInformativo("Rotação Dupla à Esquerda aplicada.")
                     } else {
                         exibirTextoInformativo("Executaria uma Rotação Dupla à Esquerda no nó \(noAtual.valor).")
@@ -204,7 +200,12 @@ class TelaPrincipalViewModel: ObservableObject {
         if k2.isRaiz {
             self.raiz = k1
         } else {
-            k2.pai!.esquerda = k1
+            switch k2.orientacaoEmRelacaoAoPai {
+            case .esquerda:
+                k2.pai!.esquerda = k1
+            default:
+                k2.pai!.direita = k1
+            }
         }
         
         k1.pai = k2.pai
@@ -220,13 +221,24 @@ class TelaPrincipalViewModel: ObservableObject {
         z?.pai = k2
     }
     
-    func rotacaoDuplaADireita(_ k3: No, pai: No?) {
+    func rotacaoDuplaADireita(_ k3: No) {
         let k1 = k3.esquerda!
         let k2 = k1.direita!
         //let a = k1.esquerda
         let b = k2.esquerda
         let c = k2.direita
         //let d = k3.direita
+        
+        if k3.isRaiz {
+            self.raiz = k2
+        } else {
+            switch k3.orientacaoEmRelacaoAoPai {
+            case .esquerda:
+                k3.pai!.esquerda = k2
+            default:
+                k3.pai!.direita = k2
+            }
+        }
         
         // Rotação esquerda
         k3.esquerda = k2
@@ -243,13 +255,9 @@ class TelaPrincipalViewModel: ObservableObject {
         
         k3.pai = k2
         k3.esquerda = c
-        
-        if pai != nil {
-            pai!.esquerda = k2
-        }
     }
     
-    func rotacaoDuplaAEsquerda(_ k1: No, pai: No?) {
+    func rotacaoDuplaAEsquerda(_ k1: No) {
         let k3 = k1.direita!
         let k2 = k3.esquerda!
         let a = k1.esquerda
